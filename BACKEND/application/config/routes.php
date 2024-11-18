@@ -73,5 +73,15 @@ $route['sales/add'] = 'Sales/add';
 $route['sales/save'] = 'Sales/save';
 
 
+$route['sales/reports'] = 'Sales/reports';
+
+$route['sales/export_csv'] = 'Sales/export_csv';
+$route['sales/export_pdf'] = 'Sales/export_pdf';
+
+
+$route['invoice/generate/(:num)'] = 'Invoice/generate/$1';
+$route['invoice/download/(:num)'] = 'Invoice/download/$1';
+
+
 
 

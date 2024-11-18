@@ -31,8 +31,24 @@
 </head>
 <body>
 <h1>Sales List</h1>
-<a class="btn" href="<?php echo base_url('sales/add'); ?>">Add Sale</a>
 
+<!-- Filter Form -->
+<form method="get" action="<?php echo base_url('sales'); ?>">
+	<label for="product_name">Product Name:</label>
+	<input type="text" name="product_name" id="product_name" value="<?php echo $this->input->get('product_name'); ?>" placeholder="Enter product name">
+
+	<label for="start_date">Start Date:</label>
+	<input type="date" name="start_date" id="start_date" value="<?php echo $this->input->get('start_date'); ?>">
+
+	<label for="end_date">End Date:</label>
+	<input type="date" name="end_date" id="end_date" value="<?php echo $this->input->get('end_date'); ?>">
+
+	<button type="submit" class="btn">Filter</button>
+	<a href="<?php echo base_url('sales'); ?>" class="btn">Reset</a>
+</form>
+
+
+<!-- Sales Table -->
 <?php if (!empty($sales)): ?>
 	<table>
 		<thead>
@@ -59,7 +75,13 @@
 		</tbody>
 	</table>
 <?php else: ?>
-	<p>No sales have been recorded yet.</p>
+	<p>No sales found for the selected filters.</p>
 <?php endif; ?>
+
+<td>
+	<a href="<?php echo base_url('invoice/generate/' . $sale->id); ?>" class="btn">View Invoice</a>
+	<a href="<?php echo base_url('invoice/download/' . $sale->id); ?>" class="btn">Download Invoice</a>
+</td>
+
 </body>
 </html>
