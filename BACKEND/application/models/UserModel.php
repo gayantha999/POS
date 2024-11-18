@@ -9,11 +9,10 @@ class UserModel extends CI_Model {
 	}
 
 	public function login($username, $password) {
-		$query = $this->db->get_where('users', [
-			'username' => $username,
-			'password' => md5($password)
-		]);
+		$this->db->where('username', $username);
+		$this->db->where('password', hash('sha256', $password));
+		$query = $this->db->get('Users');
 
-		return $query->row();
+		return $query->row(); // Return user data if found
 	}
 }
