@@ -386,11 +386,12 @@ $config['encryption_key'] = '';
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200; // Session expiration in seconds (2 hours)
-$config['sess_save_path'] = sys_get_temp_dir(); // Default temp directory
-$config['sess_match_ip'] = FALSE; // Match session by IP
-$config['sess_time_to_update'] = 300; // Regenerate session ID every 5 minutes
+$config['sess_expiration'] = 7200; // 2 hours
+$config['sess_save_path'] = NULL; // Default path for file storage
+$config['sess_match_ip'] = FALSE;
+$config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+
 
 
 /*

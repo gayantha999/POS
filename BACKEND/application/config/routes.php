@@ -60,5 +60,13 @@ $route['login'] = 'Users/show_login';
 
 $route['dashboard'] = 'Dashboard/index';
 
+$route['inventory'] = 'Inventory/index';
+$route['inventory/add'] = 'Inventory/add';
+$route['inventory/edit/(:num)'] = 'Inventory/edit/$1';
+$route['inventory/delete/(:num)'] = 'Inventory/delete/$1';
+$route['inventory/add'] = 'Inventory/add_new';
+$route['inventory/save'] = 'Inventory/save';
+
+
 
 
