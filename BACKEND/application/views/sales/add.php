@@ -18,7 +18,7 @@
 	<select id="product_id" name="product_id" required>
 		<option value="">Select Product</option>
 		<?php foreach ($products as $product): ?>
-			<option value="<?php echo $product->id; ?>">
+			<option value="<?php echo $product->product_id; ?>">
 				<?php echo $product->name; ?>
 			</option>
 		<?php endforeach; ?>
