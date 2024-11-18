@@ -68,5 +68,10 @@ $route['inventory/add'] = 'Inventory/add_new';
 $route['inventory/save'] = 'Inventory/save';
 
 
+$route['sales'] = 'Sales/index';
+$route['sales/add'] = 'Sales/add';
+$route['sales/save'] = 'Sales/save';
+
+
 
 
