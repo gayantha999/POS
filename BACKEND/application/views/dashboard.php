@@ -2,71 +2,96 @@
 <html>
 <head>
 	<title>Dashboard</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 	<style>
 		/* General Styles */
 		body {
-			font-family: Arial, sans-serif;
+			font-family: 'Inter', Arial, sans-serif;
 			margin: 0;
 			padding: 0;
-			background-image: url('application/assets/background.jpg');
-			background-size: cover;
-			background-position: center;
-			background-attachment: fixed;
-			background-repeat: no-repeat;
+			background: linear-gradient(135deg, #007bff, #0056b3);
+			color: #333;
 		}
 
 		h1 {
 			text-align: center;
 			margin-top: 20px;
-			color: #333;
+			color: #fff;
+			font-size: 2.5rem;
+			font-weight: 600;
 		}
 
 		/* Dashboard Container */
 		.dashboard-container {
 			max-width: 1200px;
-			margin: 20px auto;
-			padding: 20px;
-			background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-			border-radius: 8px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			margin: 50px auto;
+			padding: 30px;
+			background: #ffffff;
+			border-radius: 15px;
+			box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 		}
 
 		/* Buttons Container */
 		.button-container {
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: center;
-			gap: 20px;
+			justify-content: space-around;
 			margin-top: 30px;
 		}
 
 		/* Buttons */
-		button {
-			padding: 15px 25px;
+		.button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			width: 180px;
+			height: 150px;
+			padding: 20px;
 			font-size: 16px;
 			color: #fff;
-			background-color: #007bff;
+			background: linear-gradient(135deg, #6c63ff, #3a3dff);
 			border: none;
-			border-radius: 5px;
+			border-radius: 15px;
 			cursor: pointer;
+			text-align: center;
 			transition: all 0.3s ease;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		}
-
-		button:hover {
-			background-color: #0056b3;
 			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 		}
 
-		a {
-			text-decoration: none;
+		.button:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+		}
+
+		.button i {
+			font-size: 2.5rem;
+			margin-bottom: 10px;
+		}
+
+		.button span {
+			font-weight: 600;
 		}
 
 		/* Footer */
 		.footer {
 			text-align: center;
-			margin-top: 40px;
-			color: #777;
+			margin-top: 20px;
+			color: #fff;
+			font-size: 0.9rem;
+		}
+
+		/* Responsive Design */
+		@media (max-width: 768px) {
+			.button-container {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.button {
+				width: 100%;
+				margin-bottom: 15px;
+			}
 		}
 	</style>
 </head>
@@ -76,23 +101,27 @@
 
 	<div class="button-container">
 		<!-- View Product List -->
-		<a href="<?php echo base_url('inventory'); ?>">
-			<button>View Product List</button>
+		<a href="<?php echo base_url('inventory'); ?>" class="button">
+			<i class="fas fa-boxes"></i>
+			<span>View Product List</span>
 		</a>
 
 		<!-- Add Sale -->
-		<a href="<?php echo base_url('sales/add'); ?>">
-			<button>Add Sale</button>
+		<a href="<?php echo base_url('sales/add'); ?>" class="button">
+			<i class="fas fa-shopping-cart"></i>
+			<span>Add Sale</span>
 		</a>
 
 		<!-- View Sales -->
-		<a href="<?php echo base_url('sales'); ?>">
-			<button>View Sales</button>
+		<a href="<?php echo base_url('sales'); ?>" class="button">
+			<i class="fas fa-receipt"></i>
+			<span>View Sales</span>
 		</a>
 
 		<!-- View Reports -->
-		<a href="<?php echo base_url('sales/reports'); ?>">
-			<button>View Reports</button>
+		<a href="<?php echo base_url('sales/reports'); ?>" class="button">
+			<i class="fas fa-chart-line"></i>
+			<span>View Reports</span>
 		</a>
 	</div>
 </div>
@@ -100,5 +129,8 @@
 <div class="footer">
 	<p>&copy; <?php echo date('Y'); ?> Mobile Shop POS System</p>
 </div>
+
+<!-- FontAwesome Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
