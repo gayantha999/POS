@@ -25,4 +25,23 @@ class ProductModel extends CI_Model {
 		$this->db->where('product_id', $id);
 		return $this->db->get('Products')->row();
 	}
+
+	public function get_filtered_products($search = null, $category = null) {
+		$this->db->select('*');
+		$this->db->from('products');
+
+		// Apply search filter
+		if ($search) {
+			$this->db->like('name', $search);
+		}
+
+		// Apply category filter
+		if ($category) {
+			$this->db->where('category', $category);
+		}
+
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 }

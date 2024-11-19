@@ -111,11 +111,11 @@
 
 		/* Specific styles for Back to Inventory button */
 		a.back-link {
-			background-color: #f44336; /* Red color */
+			background-color: #007bff; /* Red color */
 		}
 
 		a.back-link:hover {
-			background-color: #d32f2f; /* Darker red on hover */
+			background-color: #007bff; /* Darker red on hover */
 			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 		}
 
@@ -146,6 +146,12 @@
 
 <a class="back-link" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
 
+
+<form method="get" action="<?php echo base_url('inventory'); ?>" style="margin-bottom: 20px;">
+	<input type="text" name="search" placeholder="Search by name" value="<?php echo $this->input->get('search'); ?>" style="padding: 8px; font-size: 14px;">
+	<button type="submit" style="padding: 8px 16px; font-size: 14px; background-color: #007bff; color: #fff; border: none; border-radius: 5px;">Filter</button>
+	<a href="<?php echo base_url('inventory'); ?>" style="padding: 8px 16px; font-size: 14px; background-color: #6c757d; color: #fff; border: none; border-radius: 5px; text-decoration: none;">Reset</a>
+</form>
 <!-- Flash Message -->
 <?php if ($this->session->flashdata('message')): ?>
 	<div class="flash-message">

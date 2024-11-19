@@ -9,7 +9,14 @@ class Inventory extends CI_Controller {
 	}
 
 	public function index() {
-		$data['products'] = $this->ProductModel->get_all_products();
+		// Get filter criteria from input
+		$search = $this->input->get('search');
+		$category = $this->input->get('category');
+
+		// Fetch filtered products
+		$data['products'] = $this->ProductModel->get_filtered_products($search, $category);
+
+		// Load the view with data
 		$this->load->view('inventory/list', $data);
 	}
 

@@ -134,11 +134,11 @@
 
 		/* Specific styles for Back to Inventory button */
 		a.back-link {
-			background-color: #f44336; /* Red color */
+			background-color: #007bff; /* Red color */
 		}
 
 		a.back-link:hover {
-			background-color: #d32f2f; /* Darker red on hover */
+			background-color: #007bff; /* Darker red on hover */
 			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 		}
 
