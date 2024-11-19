@@ -36,6 +36,7 @@ class Sales extends CI_Controller {
 			'quantity' => $quantity,
 			'selling_price' => $selling_price,
 			'total_price' => $total_price,
+			'payment_type' =>$this->input->post('payment_method'),
 			'customer_name' => $this->input->post('customer_name'),
 		];
 

@@ -196,6 +196,7 @@
 			<th>Selling Price</th>
 			<th>Quantity</th>
 			<th>Total Price</th>
+			<th>Payment Type</th>
 			<th>Customer Name</th>
 			<th>Date</th>
 		</tr>
@@ -209,6 +210,7 @@
 				<td><?php echo $sale->selling_price; ?></td>
 				<td><?php echo $sale->quantity; ?></td>
 				<td><?php echo $sale->total_price; ?></td>
+				<td><?php echo $sale->payment_type; ?></td>
 				<td><?php echo $sale->customer_name ?: 'N/A'; ?></td>
 				<td><?php echo $sale->sale_date; ?></td>
 				<td>

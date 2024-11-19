@@ -32,6 +32,15 @@
 	</div>
 
 	<div class="form-group">
+		<label for="payment_method">Payment Method:</label>
+		<select id="payment_method" name="payment_method" required>
+			<option value="">Select Payment Method</option>
+			<option value="cash">Cash</option>
+			<option value="card">Card</option>
+		</select>
+	</div>
+
+	<div class="form-group">
 		<label for="total_price">Total Price:</label>
 		<input type="text" id="total_price" name="total_price" readonly>
 	</div>
@@ -125,43 +134,25 @@
 	}
 
 	/* General button styles */
-	a.back-link,
-	a.add-button {
+	a.back-link {
 		display: inline-block;
 		padding: 10px 20px;
 		font-size: 16px;
 		color: #fff;
 		text-decoration: none;
 		border-radius: 5px;
+		background-color: #f44336; /* Red */
 		transition: all 0.3s ease;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	/* Specific styles for Back to Inventory button */
-	a.back-link {
-		background-color: #f44336; /* Red color */
 	}
 
 	a.back-link:hover {
-		background-color: #d32f2f; /* Darker red on hover */
-		box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+		background-color: #d32f2f; /* Darker red */
 	}
 
-	/* Specific styles for Dashboard button */
-	a.add-button {
-		background-color: #4caf50; /* Green color */
-	}
-
-	a.add-button:hover {
-		background-color: #388e3c; /* Darker green on hover */
-		box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-	}
-
-	/* Optional: Container for alignment */
 	.button-container {
 		display: flex;
 		justify-content: center;
-		gap: 20px; /* Space between buttons */
+		gap: 20px;
 		margin-top: 20px;
 	}
 </style>
