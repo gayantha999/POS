@@ -25,31 +25,25 @@ class Sales extends CI_Controller {
 	}
 
 	public function save() {
-//		$this->form_validation->set_rules('product_id', 'Product', 'required');
-//		$this->form_validation->set_rules('quantity', 'Quantity', 'required|integer|greater_than[0]');
+		$product = $this->ProductModel->get_product_by_id($this->input->post('product_id'));
+		$quantity = $this->input->post('quantity');
+		$selling_price = $this->input->post('selling_price');
+		$total_price = $quantity * $selling_price;
 
+		$data = [
+			'product_id' => $this->input->post('product_id'),
+			'price' => $product->price,
+			'quantity' => $quantity,
+			'selling_price' => $selling_price,
+			'total_price' => $total_price,
+			'customer_name' => $this->input->post('customer_name'),
+		];
 
-//		if ($this->form_validation->run() === FALSE) {
-//			$this->add();
-//		} else {
-			$product = $this->ProductModel->get_product_by_id($this->input->post('product_id'));
-			$total_price = $product->price * $this->input->post('quantity');
+		$this->SalesModel->add_sale($data);
 
-
-			$data = [
-				'product_id' => $this->input->post('product_id'),
-				'quantity' => $this->input->post('quantity'),
-				'total_price' => $total_price,
-				'customer_name' => $this->input->post('customer_name'),
-			];
-//		print_r($data);die();
-			$this->SalesModel->add_sale($data);
-
-			$this->session->set_flashdata('message', 'Sale recorded successfully!');
-			redirect('sales');
-//		}
+		$this->session->set_flashdata('message', 'Sale recorded successfully!');
+		redirect('sales');
 	}
-
 	public function reports() {
 		// Load required models
 		$this->load->model('SalesModel');
@@ -78,7 +72,7 @@ class Sales extends CI_Controller {
 
 		// File creation
 		$file = fopen('php://output', 'w');
-		$header = ['Sale ID', 'Product Name', 'Quantity', 'Total Price', 'Customer Name', 'Sale Date'];
+		$header = ['Sale ID', 'Product Name', 'Quantity','price','selling_price', 'Total Price', 'Customer Name', 'Sale Date'];
 		fputcsv($file, $header);
 
 		foreach ($sales_data as $line) {

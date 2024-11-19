@@ -15,7 +15,7 @@ class SalesModel extends CI_Model {
 	}
 
 	public function get_filtered_sales($product_name = '', $start_date = '', $end_date = '') {
-		$this->db->select('sales.id, products.name as product_name, sales.quantity, sales.total_price, sales.customer_name, sales.sale_date');
+		$this->db->select('sales.*,sales.id, products.name as product_name, sales.quantity, sales.total_price, sales.customer_name, sales.sale_date');
 		$this->db->from('sales');
 		$this->db->join('products', 'sales.product_id = products.product_id', 'left');
 
@@ -67,7 +67,7 @@ class SalesModel extends CI_Model {
 
 
 	public function get_all_sales_pdf() {
-		$this->db->select('sales.id, products.name as product_name, sales.quantity, sales.total_price, sales.customer_name, sales.sale_date');
+		$this->db->select('sales.*,sales.id, products.name as product_name, sales.quantity, sales.total_price, sales.customer_name, sales.sale_date');
 		$this->db->from('sales');
 		$this->db->join('products', 'sales.product_id = products.product_id', 'left');
 

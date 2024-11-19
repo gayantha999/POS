@@ -150,13 +150,14 @@
 	<table>
 		<thead>
 		<tr>
-			<th>Sale ID</th>
+			<th>ID</th>
 			<th>Product</th>
+			<th>Price</th>
+			<th>Selling Price</th>
 			<th>Quantity</th>
 			<th>Total Price</th>
 			<th>Customer Name</th>
-			<th>Sale Date</th>
-			<th>Actions</th>
+			<th>Date</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -164,6 +165,8 @@
 			<tr>
 				<td><?php echo $sale->id; ?></td>
 				<td><?php echo $sale->product_name; ?></td>
+				<td><?php echo $sale->price; ?></td>
+				<td><?php echo $sale->selling_price; ?></td>
 				<td><?php echo $sale->quantity; ?></td>
 				<td><?php echo $sale->total_price; ?></td>
 				<td><?php echo $sale->customer_name ?: 'N/A'; ?></td>
