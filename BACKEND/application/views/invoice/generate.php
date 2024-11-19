@@ -141,7 +141,7 @@
 			<tr>
 				<th>Product</th>
 				<th>Quantity</th>
-				<th>Unit Price</th>
+<!--				<th>Unit Price</th>-->
 				<th>Total</th>
 			</tr>
 			</thead>
@@ -149,7 +149,7 @@
 			<tr>
 				<td><?php echo $sale->product_name; ?></td>
 				<td><?php echo $sale->quantity; ?></td>
-				<td><?php echo number_format($sale->price, 2); ?> LKR</td>
+
 				<td><?php echo number_format($sale->total_price, 2); ?> LKR</td>
 			</tr>
 			</tbody>
