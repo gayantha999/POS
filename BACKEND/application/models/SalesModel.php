@@ -171,4 +171,32 @@ class SalesModel extends CI_Model {
 
 		return $this->db->get()->result();
 	}
+
+
+
+
+
+	public function QuantityManage($id,$quantity){
+
+		// Retrieve the current quantity of the product
+		$this->db->select('stock');
+		$this->db->from('products');
+		$this->db->where('product_id', $id);
+		$product = $this->db->get()->row();
+
+//		var_dump($product);die();
+		// Calculate the new quantity
+		$newQuantity = $product->stock - $quantity;
+
+		if ($newQuantity < 0) {
+			return false; // Insufficient stock
+		}
+
+		// Update the product quantity in the database
+		$this->db->where('product_id', $id);
+		$this->db->update('products', ['stock' => $newQuantity]);
+
+		return $this->db->affected_rows() > 0;
+	}
+
 }

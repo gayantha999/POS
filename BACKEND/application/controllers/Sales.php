@@ -39,8 +39,9 @@ class Sales extends CI_Controller {
 			'payment_type' =>$this->input->post('payment_method'),
 			'customer_name' => $this->input->post('customer_name'),
 		];
-
+		$id = $this->input->post('product_id');
 		$this->SalesModel->add_sale($data);
+		$this->SalesModel->QuantityManage($id,$quantity);
 
 		$this->session->set_flashdata('message', 'Sale recorded successfully!');
 		redirect('sales');
