@@ -37,6 +37,10 @@
 	</div>
 
 	<button type="submit" class="btn">Record Sale</button>
+	<div class="button-container">
+		<a class="back-link" href="<?php echo base_url('inventory'); ?>">Back to Inventory</a>
+		<a class="back-link" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
+	</div>
 </form>
 
 <script>
@@ -118,5 +122,46 @@
 
 	.form-group:last-child {
 		margin-bottom: 0;
+	}
+
+	/* General button styles */
+	a.back-link,
+	a.add-button {
+		display: inline-block;
+		padding: 10px 20px;
+		font-size: 16px;
+		color: #fff;
+		text-decoration: none;
+		border-radius: 5px;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	/* Specific styles for Back to Inventory button */
+	a.back-link {
+		background-color: #f44336; /* Red color */
+	}
+
+	a.back-link:hover {
+		background-color: #d32f2f; /* Darker red on hover */
+		box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Specific styles for Dashboard button */
+	a.add-button {
+		background-color: #4caf50; /* Green color */
+	}
+
+	a.add-button:hover {
+		background-color: #388e3c; /* Darker green on hover */
+		box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Optional: Container for alignment */
+	.button-container {
+		display: flex;
+		justify-content: center;
+		gap: 20px; /* Space between buttons */
+		margin-top: 20px;
 	}
 </style>

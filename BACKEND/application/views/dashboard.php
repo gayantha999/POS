@@ -8,7 +8,11 @@
 			font-family: Arial, sans-serif;
 			margin: 0;
 			padding: 0;
-			background-color: #f4f6f9;
+			background-image: url('application/assets/background.jpg');
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+			background-repeat: no-repeat;
 		}
 
 		h1 {
@@ -22,7 +26,7 @@
 			max-width: 1200px;
 			margin: 20px auto;
 			padding: 20px;
-			background: #ffffff;
+			background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
 			border-radius: 8px;
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		}
