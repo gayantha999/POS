@@ -72,7 +72,7 @@ class Sales extends CI_Controller {
 
 		// File creation
 		$file = fopen('php://output', 'w');
-		$header = ['Sale ID', 'Product Name', 'Quantity','price','selling_price', 'Total Price', 'Customer Name', 'Sale Date'];
+		$header = ['Sale ID', 'Product Number', 'Quantity','price','selling_price', 'Total Price', 'Customer Name', 'Sale Date','Item Name'];
 		fputcsv($file, $header);
 
 		foreach ($sales_data as $line) {
@@ -119,6 +119,40 @@ class Sales extends CI_Controller {
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->render();
 		$this->pdf->stream('sales_report_' . date('Ymd') . '.pdf', array("Attachment" => 1));
+	}
+
+	public function filter_report()
+	{
+		$item_id = $this->input->get('item_id');
+		$month = $this->input->get('month');
+
+		$data['products'] = $this->Sales_model->get_items();
+		$data['months'] = $this->get_months();
+		$data['daily_sales'] = $this->Sales_model->get_daily_sales($item_id, $month);
+		$data['weekly_sales'] = $this->Sales_model->get_weekly_sales($item_id, $month);
+		$data['monthly_sales'] = $this->Sales_model->get_monthly_sales($item_id, $month);
+		$data['total_revenue'] = $this->Sales_model->get_total_revenue_reports($item_id, $month);
+		$data['top_products'] = $this->Sales_model->get_top_products($item_id, $month);
+
+		$this->load->view('sales/reports', $data);
+	}
+
+	private function get_months()
+	{
+		return [
+			'01' => 'January',
+			'02' => 'February',
+			'03' => 'March',
+			'04' => 'April',
+			'05' => 'May',
+			'06' => 'June',
+			'07' => 'July',
+			'08' => 'August',
+			'09' => 'September',
+			'10' => 'October',
+			'11' => 'November',
+			'12' => 'December',
+		];
 	}
 
 }

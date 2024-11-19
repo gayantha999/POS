@@ -83,5 +83,92 @@ class SalesModel extends CI_Model {
 		return $this->db->get()->row();
 	}
 
+	public function get_items()
+	{
+		$query = $this->db->get('products');
+		return $query->result();
+	}
 
+	public function get_daily_sales($item_id = null, $month = null)
+	{
+		$this->db->select('SUM(amount) as total, COUNT(*) as sales_count');
+		$this->db->from('sales');
+		$this->db->where('DATE(date)', date('Y-m-d'));
+
+		if ($item_id) {
+			$this->db->where('item_id', $item_id);
+		}
+
+		if ($month) {
+			$this->db->where('MONTH(date)', $month);
+		}
+
+		return $this->db->get()->row();
+	}
+
+	public function get_weekly_sales($item_id = null, $month = null)
+	{
+		$this->db->select('SUM(amount) as total, COUNT(*) as sales_count');
+		$this->db->from('sales');
+		$this->db->where('YEARWEEK(date, 1)', date('YW'));
+
+		if ($item_id) {
+			$this->db->where('item_id', $item_id);
+		}
+
+		if ($month) {
+			$this->db->where('MONTH(date)', $month);
+		}
+
+		return $this->db->get()->row();
+	}
+
+	public function get_monthly_sales($item_id = null, $month = null)
+	{
+		$this->db->select('SUM(amount) as total, COUNT(*) as sales_count');
+		$this->db->from('sales');
+		$this->db->where('MONTH(date)', $month ?: date('m'));
+
+		if ($item_id) {
+			$this->db->where('item_id', $item_id);
+		}
+
+		return $this->db->get()->row();
+	}
+
+	public function get_total_revenue_reports($item_id = null, $month = null)
+	{
+		$this->db->select('SUM(amount) as total_revenue');
+		$this->db->from('sales');
+
+		if ($item_id) {
+			$this->db->where('item_id', $item_id);
+		}
+
+		if ($month) {
+			$this->db->where('MONTH(date)', $month);
+		}
+
+		return $this->db->get()->row()->total_revenue;
+	}
+
+	public function get_top_products($item_id = null, $month = null)
+	{
+		$this->db->select('items.name, SUM(sales.quantity) as total_sold');
+		$this->db->from('sales');
+		$this->db->join('items', 'sales.item_id = items.id');
+		$this->db->group_by('items.name');
+		$this->db->order_by('total_sold', 'DESC');
+		$this->db->limit(5);
+
+		if ($item_id) {
+			$this->db->where('sales.item_id', $item_id);
+		}
+
+		if ($month) {
+			$this->db->where('MONTH(sales.date)', $month);
+		}
+
+		return $this->db->get()->result();
+	}
 }
