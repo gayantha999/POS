@@ -77,7 +77,7 @@ class SalesModel extends CI_Model {
 	public function get_sale_by_id($sale_id) {
 		$this->db->select('sales.*, products.name as product_name');
 		$this->db->from('sales');
-		$this->db->join('products', 'sales.product_id = products.id', 'left');
+		$this->db->join('products', 'sales.product_id = products.product_id', 'left');
 		$this->db->where('sales.id', $sale_id);
 
 		return $this->db->get()->row();
