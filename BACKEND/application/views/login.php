@@ -5,30 +5,32 @@
 	<style>
 		/* General Styles */
 		body {
-			font-family: Arial, sans-serif;
-			background-color: #f4f6f9;
+			font-family: 'Arial', sans-serif;
 			margin: 0;
 			padding: 0;
+			background: linear-gradient(135deg, #1e1e2f, #27293d);
+			color: #fff;
+			height: 100vh;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 100vh;
 		}
 
-		/* Form Container */
+		/* Login Container */
 		.login-container {
-			background: #ffffff;
-			padding: 30px;
-			border-radius: 8px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			background: #2c2f4a;
+			padding: 30px 40px;
+			border-radius: 12px;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 			width: 100%;
 			max-width: 400px;
 		}
 
 		h2 {
 			text-align: center;
-			color: #333;
-			margin-bottom: 20px;
+			color: #00d4ff;
+			margin-bottom: 25px;
+			font-weight: bold;
 		}
 
 		/* Form Styles */
@@ -38,23 +40,25 @@
 		}
 
 		label {
-			font-weight: bold;
+			font-size: 14px;
 			margin-bottom: 5px;
-			color: #555;
+			color: #aaa;
 		}
 
 		input {
-			padding: 10px;
-			margin-bottom: 15px;
-			border: 1px solid #ddd;
-			border-radius: 5px;
+			padding: 12px;
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 6px;
 			font-size: 16px;
+			background: #44465e;
+			color: #fff;
 		}
 
 		input:focus {
 			outline: none;
-			border-color: #007bff;
-			box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+			box-shadow: 0 0 8px #00d4ff;
+			background: #3b3d56;
 		}
 
 		/* Button Styles */
@@ -63,21 +67,23 @@
 			font-size: 16px;
 			font-weight: bold;
 			color: #fff;
-			background-color: #007bff;
+			background: linear-gradient(135deg, #3a3dff, #6c63ff);
 			border: none;
-			border-radius: 5px;
+			border-radius: 8px;
 			cursor: pointer;
-			transition: all 0.3s ease;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
 		}
 
 		button:hover {
-			background-color: #0056b3;
+			transform: translateY(-3px);
+			box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4);
 		}
 
 		/* Message Styles */
 		#message {
 			margin-top: 10px;
 			text-align: center;
+			font-size: 14px;
 		}
 	</style>
 </head>
@@ -86,10 +92,10 @@
 	<h2>Login</h2>
 	<form id="loginForm">
 		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" required>
+		<input type="text" id="username" name="username" placeholder="Enter your username" required>
 
 		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" required>
+		<input type="password" id="password" name="password" placeholder="Enter your password" required>
 
 		<button type="submit">Login</button>
 	</form>
@@ -117,7 +123,7 @@
 			.then(data => {
 				const messageElement = document.getElementById('message');
 				if (data.status === 'success') {
-					messageElement.style.color = 'green';
+					messageElement.style.color = 'lightgreen';
 					messageElement.textContent = data.message;
 					// Redirect to a dashboard or another page on successful login
 					setTimeout(() => {
