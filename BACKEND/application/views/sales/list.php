@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Sales List</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
 	<style>
 		/* General Styles */
 		body {
@@ -159,6 +161,30 @@
 			gap: 20px; /* Space between buttons */
 			margin-top: 20px;
 		}
+
+		.action-btn {
+			display: inline-block;
+			padding: 5px;
+			border-radius: 5px;
+			color: #fff;
+			text-decoration: none;
+			margin-right: 10px;
+			font-size: 10px;
+			transition: all 0.3s ease;
+		}
+
+		.view-btn {
+			background-color: #007bff;
+		}
+
+		.download-btn {
+			background-color: #28a745;
+		}
+
+		.action-btn:hover {
+			opacity: 0.8;
+		}
+
 	</style>
 </head>
 <body>
@@ -198,6 +224,7 @@
 			<th>Total Price</th>
 			<th>Payment Type</th>
 			<th>Customer Name</th>
+			<th>Description</th>
 			<th>Date</th>
 		</tr>
 		</thead>
@@ -212,10 +239,16 @@
 				<td><?php echo $sale->total_price; ?></td>
 				<td><?php echo $sale->payment_type; ?></td>
 				<td><?php echo $sale->customer_name ?: 'N/A'; ?></td>
+				<td><?php echo $sale->description ?: 'N/A'; ?></td>
 				<td><?php echo $sale->sale_date; ?></td>
 				<td>
-					<a href="<?php echo base_url('invoice/generate/' . $sale->id); ?>" class="action-btn view-btn">View</a>
-					<a href="<?php echo base_url('invoice/download/' . $sale->id); ?>" class="action-btn download-btn">Download</a>
+					<a href="<?php echo base_url('invoice/generate/' . $sale->id); ?>" class="action-btn view-btn">
+						<i class="fas fa-eye"></i>
+					</a><br>
+					<a href="<?php echo base_url('invoice/download/' . $sale->id); ?>" class="action-btn download-btn">
+						<i class="fas fa-download"></i>
+					</a>
+
 				</td>
 			</tr>
 		<?php endforeach; ?>

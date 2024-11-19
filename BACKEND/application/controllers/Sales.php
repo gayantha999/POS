@@ -38,6 +38,7 @@ class Sales extends CI_Controller {
 			'total_price' => $total_price,
 			'payment_type' =>$this->input->post('payment_method'),
 			'customer_name' => $this->input->post('customer_name'),
+			'description' => $this->input->post('description'),
 		];
 		$id = $this->input->post('product_id');
 		$this->SalesModel->add_sale($data);

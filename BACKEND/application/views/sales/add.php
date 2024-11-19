@@ -32,6 +32,11 @@
 	</div>
 
 	<div class="form-group">
+		<label for="description">Description:</label>
+		<input type="text" id="description" name="description">
+	</div>
+
+	<div class="form-group">
 		<label for="payment_method">Payment Method:</label>
 		<select id="payment_method" name="payment_method" required>
 			<option value="">Select Payment Method</option>
