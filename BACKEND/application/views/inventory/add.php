@@ -8,19 +8,19 @@
 			font-family: Arial, sans-serif;
 			margin: 0;
 			padding: 0;
-			background-color: #f4f6f9;
+			background: linear-gradient(135deg, #e0e0e0, #f4f4f4);
+			min-height: 100vh;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			min-height: 100vh;
 		}
 
 		/* Container Styles */
 		.container {
-			background: #ffffff;
-			padding: 20px 30px;
-			border-radius: 8px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			background: #fff;
+			padding: 30px 40px;
+			border-radius: 12px;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 			width: 100%;
 			max-width: 500px;
 		}
@@ -29,6 +29,8 @@
 			text-align: center;
 			color: #333;
 			margin-bottom: 20px;
+			font-size: 24px;
+			font-weight: bold;
 		}
 
 		/* Form Styles */
@@ -44,10 +46,10 @@
 		}
 
 		input {
-			padding: 10px;
+			padding: 12px;
 			margin-bottom: 15px;
-			border: 1px solid #ddd;
-			border-radius: 5px;
+			border: 1px solid #ccc;
+			border-radius: 6px;
 			font-size: 16px;
 		}
 
@@ -64,7 +66,7 @@
 			color: #fff;
 			background-color: #007bff;
 			border: none;
-			border-radius: 5px;
+			border-radius: 6px;
 			cursor: pointer;
 			transition: all 0.3s ease;
 		}
@@ -73,80 +75,69 @@
 			background-color: #0056b3;
 		}
 
-		.back-link {
+		/* Button Links Styles */
+		.link-button {
 			display: inline-block;
-			margin-bottom: 20px;
-			font-size: 14px;
-			color: #007bff;
-			text-decoration: none;
-		}
-
-		.back-link:hover {
-			text-decoration: underline;
-		}
-
-		.error-message {
-			color: red;
-			margin-bottom: 15px;
-			font-size: 14px;
-		}
-
-		/* General button styles */
-		a.back-link,
-		a.add-button {
-			display: inline-block;
+			text-align: center;
 			padding: 10px 20px;
-			font-size: 16px;
-			color: #fff;
+			font-size: 14px;
+			font-weight: bold;
 			text-decoration: none;
-			border-radius: 5px;
+			border-radius: 6px;
+			margin-bottom: 20px;
 			transition: all 0.3s ease;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			color: #fff;
 		}
 
-		/* Specific styles for Back to Inventory button */
-		a.back-link {
-			background-color: #f44336; /* Red color */
+		.link-button.back {
+			background-color: #f44336;
 		}
 
-		a.back-link:hover {
-			background-color: #d32f2f; /* Darker red on hover */
-			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+		.link-button.back:hover {
+			background-color: #d32f2f;
 		}
 
-		/* Specific styles for Dashboard button */
-		a.add-button {
-			background-color: #4caf50; /* Green color */
+		.link-button.dashboard {
+			background-color: #4caf50;
 		}
 
-		a.add-button:hover {
-			background-color: #388e3c; /* Darker green on hover */
-			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+		.link-button.dashboard:hover {
+			background-color: #388e3c;
 		}
 
-		/* Optional: Container for alignment */
+		/* Button Group */
 		.button-container {
 			display: flex;
-			justify-content: center;
-			gap: 20px; /* Space between buttons */
-			margin-top: 20px;
+			justify-content: space-between;
+			margin-bottom: 20px;
+		}
+
+		/* Error Messages */
+		.error-message {
+			color: red;
+			font-size: 14px;
+			margin-bottom: 15px;
 		}
 	</style>
 </head>
 <body>
 <div class="container">
 	<h1>Add New Product</h1>
+
+	<!-- Button Links -->
 	<div class="button-container">
-		<a class="back-link" href="<?php echo base_url('inventory'); ?>">Back to Inventory</a>
-		<a class="back-link" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
+		<a class="link-button back" href="<?php echo base_url('inventory'); ?>">Back to Inventory</a>
+		<a class="link-button dashboard" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
 	</div>
 
+	<!-- Error Messages -->
 	<?php if (validation_errors()): ?>
 		<div class="error-message">
 			<?php echo validation_errors(); ?>
 		</div>
 	<?php endif; ?>
 
+	<!-- Add Product Form -->
 	<form action="<?php echo base_url('inventory/save'); ?>" method="post">
 		<label for="name">Product Name:</label>
 		<input type="text" id="name" name="name" value="<?php echo set_value('name'); ?>" required>
