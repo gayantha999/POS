@@ -214,8 +214,8 @@
 				<td><?php echo $sale->customer_name ?: 'N/A'; ?></td>
 				<td><?php echo $sale->sale_date; ?></td>
 				<td>
-					<a href="<?php echo base_url('invoice/generate/' . $sale->id); ?>" class="action-btn view-btn">View Invoice</a>
-					<a href="<?php echo base_url('invoice/download/' . $sale->id); ?>" class="action-btn download-btn">Download Invoice</a>
+					<a href="<?php echo base_url('invoice/generate/' . $sale->id); ?>" class="action-btn view-btn">View</a>
+					<a href="<?php echo base_url('invoice/download/' . $sale->id); ?>" class="action-btn download-btn">Download</a>
 				</td>
 			</tr>
 		<?php endforeach; ?>
