@@ -225,6 +225,7 @@
 			<th>Payment Type</th>
 			<th>Customer Name</th>
 			<th>Description</th>
+			<th>Warranty</th>
 			<th>Date</th>
 		</tr>
 		</thead>
@@ -240,6 +241,7 @@
 				<td><?php echo $sale->payment_type; ?></td>
 				<td><?php echo $sale->customer_name ?: 'N/A'; ?></td>
 				<td><?php echo $sale->description ?: 'N/A'; ?></td>
+				<td><?php echo $sale->warranty ?: 'N/A'; ?></td>
 				<td><?php echo $sale->sale_date; ?></td>
 				<td>
 					<a href="<?php echo base_url('invoice/generate/' . $sale->id); ?>" class="action-btn view-btn">

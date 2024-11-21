@@ -141,6 +141,7 @@
 			<tr>
 				<th>Product</th>
 				<th>Quantity</th>
+				<th>Warranty</th>
 <!--				<th>Unit Price</th>-->
 				<th>Total</th>
 			</tr>
@@ -149,6 +150,7 @@
 			<tr>
 				<td><?php echo $sale->product_name; ?></td>
 				<td><?php echo $sale->quantity; ?></td>
+				<td><?php echo $sale->warranty; ?></td>
 
 				<td><?php echo number_format($sale->total_price, 2); ?> LKR</td>
 			</tr>

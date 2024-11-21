@@ -37,6 +37,11 @@
 	</div>
 
 	<div class="form-group">
+		<label for="warranty">Warranty:</label>
+		<input type="text" id="warranty" name="warranty">
+	</div>
+
+	<div class="form-group">
 		<label for="payment_method">Payment Method:</label>
 		<select id="payment_method" name="payment_method" required>
 			<option value="">Select Payment Method</option>
