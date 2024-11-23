@@ -135,7 +135,8 @@ class Sales extends CI_Controller {
 		$input = json_decode(file_get_contents('php://input'), true);
 
 		$last_invoice = $this->SalesModel->getLastInvoiceNumber();
-		$new_invoice_number = $last_invoice ? 'Invoice-' . ($last_invoice + 1) : 'Invoice-1';
+		$last_digit = intval(substr($last_invoice, -1));
+		$new_invoice_number = $last_invoice ? 'Invoice-' . ($last_digit + 1) : 'Invoice-1';
 		// Process sales data (simplified example)
 		foreach ($input['sales'] as $sale) {
 
