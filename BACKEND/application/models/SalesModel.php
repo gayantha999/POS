@@ -2,6 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class SalesModel extends CI_Model {
+
+	public function __construct() {
+		parent::__construct();
+		$this->load->database();
+	}
 	public function add_sale($data) {
 		return $this->db->insert('sales', $data);
 	}
@@ -197,6 +202,14 @@ class SalesModel extends CI_Model {
 		$this->db->update('products', ['stock' => $newQuantity]);
 
 		return $this->db->affected_rows() > 0;
+	}
+
+	public function getLastInvoiceNumber()
+	{
+		$this->db->select_max('invoice_number');
+		$query = $this->db->get('sales');
+		$result = $query->row();
+		return $result->invoice_number ?? null;
 	}
 
 }

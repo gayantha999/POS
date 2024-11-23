@@ -216,7 +216,8 @@
 	<table>
 		<thead>
 		<tr>
-			<th>ID</th>
+
+			<th>Invoice Number</th>
 			<th>Product</th>
 			<th>Price</th>
 			<th>Selling Price</th>
@@ -232,7 +233,8 @@
 		<tbody>
 		<?php foreach ($sales as $sale): ?>
 			<tr>
-				<td><?php echo $sale->id; ?></td>
+				
+				<td><?php echo $sale->invoice_number; ?></td>
 				<td><?php echo $sale->product_name; ?></td>
 				<td><?php echo $sale->price; ?></td>
 				<td><?php echo $sale->selling_price; ?></td>

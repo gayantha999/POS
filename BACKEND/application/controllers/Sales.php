@@ -24,30 +24,155 @@ class Sales extends CI_Controller {
 		$this->load->view('sales/add', $data);
 	}
 
-	public function save() {
-		$product = $this->ProductModel->get_product_by_id($this->input->post('product_id'));
-		$quantity = $this->input->post('quantity');
-		$selling_price = $this->input->post('selling_price');
-		$total_price = $quantity * $selling_price;
+//	public function save() {
+//		$product = $this->ProductModel->get_product_by_id($this->input->post('product_id'));
+//		$quantity = $this->input->post('quantity');
+//		$selling_price = $this->input->post('selling_price');
+//		$total_price = $quantity * $selling_price;
+//
+//		$data = [
+//			'product_id' => $this->input->post('product_id'),
+//			'price' => $product->price,
+//			'quantity' => $quantity,
+//			'selling_price' => $selling_price,
+//			'total_price' => $total_price,
+//			'payment_type' =>$this->input->post('payment_method'),
+//			'customer_name' => $this->input->post('customer_name'),
+//			'description' => $this->input->post('description'),
+//			'warranty' => $this->input->post('warranty'),
+//		];
+//		$id = $this->input->post('product_id');
+//		$this->SalesModel->add_sale($data);
+//		$this->SalesModel->QuantityManage($id,$quantity);
+//
+//		$this->session->set_flashdata('message', 'Sale recorded successfully!');
+//
+//	}
 
-		$data = [
-			'product_id' => $this->input->post('product_id'),
-			'price' => $product->price,
-			'quantity' => $quantity,
-			'selling_price' => $selling_price,
-			'total_price' => $total_price,
-			'payment_type' =>$this->input->post('payment_method'),
-			'customer_name' => $this->input->post('customer_name'),
-			'description' => $this->input->post('description'),
-			'warranty' => $this->input->post('warranty'),
-		];
-		$id = $this->input->post('product_id');
-		$this->SalesModel->add_sale($data);
-		$this->SalesModel->QuantityManage($id,$quantity);
+//	public function save() {
+//		// Retrieve form data
+//		$product_ids = $this->input->post('product_id');
+//		$prices = $this->input->post('price');
+//		$quantities = $this->input->post('quantity');
+//		$selling_prices = $this->input->post('selling_price');
+//		$total_prices = $this->input->post('total_price');
+//		$payment_type = $this->input->post('payment_method');
+//		$customer_name = $this->input->post('customer_name');
+//		$description = $this->input->post('description');
+//		$warranty = $this->input->post('warranty');
+//
+//		// Ensure required fields are not empty
+//
+//		// Load the model
+//		$this->load->model('SalesModel');
+//
+//var_dump($product_ids);die();
+//		try {
+//			// Loop through each product entry
+//			foreach ($product_ids as $index => $product_id) {
+//				// Prepare data for insertion
+//				$data = [
+//					'product_id' => $product_id,
+//					'price' => $prices[$index],
+//					'quantity' => $quantities[$index],
+//					'selling_price' => $selling_prices[$index],
+//					'total_price' => $total_prices[$index],
+//					'payment_type' => $payment_type,
+//					'customer_name' => $customer_name,
+//					'description' => $description,
+//					'warranty' => $warranty,
+//					'created_at' => date('Y-m-d H:i:s') // Add timestamp
+//				];
+//
+//
+//				// Save each sale
+//				$this->SalesModel->add_sale($data);
+//
+//				// Update inventory quantity
+//				$this->SalesModel->QuantityManage($product_id, $quantities[$index]);
+//			}
+//
+//			// Commit transaction
+//			$this->db->trans_complete();
+//
+//			// Check transaction status
+//			if ($this->db->trans_status() === FALSE) {
+//				throw new Exception('Database transaction failed.');
+//			}
+//
+//			// Set success message and redirect
+//			$this->session->set_flashdata('success', 'Sales recorded successfully!');
+//			redirect('sales');
+//
+//		} catch (Exception $e) {
+//			// Rollback transaction and set error message
+//			$this->db->trans_rollback();
+//			$this->session->set_flashdata('error', 'An error occurred: ' . $e->getMessage());
+//			redirect('sales/add');
+//		}
+//	}
 
-		$this->session->set_flashdata('message', 'Sale recorded successfully!');
-		redirect('sales');
+//	public function save() {
+//		$salesData = json_decode(file_get_contents('php://input'), true);
+//		var_dump($salesData['sales']);die();
+//		if (!isset($salesData['sales']) || empty($salesData['sales'])) {
+//			echo json_encode(['success' => false, 'message' => 'Invalid data submitted.']);
+//			return;
+//		}
+//
+//		foreach ($salesData['sales'] as $sale) {
+//			// Save each sale and update inventory as needed
+//			$this->SalesModel->add_sale($sale);
+//			$this->SalesModel->QuantityManage($sale['product_id'], $sale['quantity']);
+//		}
+//
+//		echo json_encode(['success' => true, 'message' => 'Sales recorded successfully!']);
+//	}
+
+	public function save()
+	{
+		// Get JSON input
+		$input = json_decode(file_get_contents('php://input'), true);
+
+		$last_invoice = $this->SalesModel->getLastInvoiceNumber();
+		$new_invoice_number = $last_invoice ? 'Invoice-' . ($last_invoice + 1) : 'Invoice-1';
+		// Process sales data (simplified example)
+		foreach ($input['sales'] as $sale) {
+
+			if (empty($sale['product_id']) || empty($sale['selling_price']) || empty($sale['quantity'])) {
+				echo json_encode(['success' => false, 'message' => 'Invalid sales data.']);
+				return;
+			}
+
+			// Save to the database
+			// Assuming $this->db is the database instance
+			$data =  [
+				'invoice_number' => $new_invoice_number,
+				'product_id' => $sale['product_id'],
+				'price' => $sale['price'],
+				'selling_price' => $sale['selling_price'],
+				'quantity' => $sale['quantity'],
+				'payment_type' => $sale['payment_type'],
+				'customer_name' => $sale['customer_name'],
+				'description' => $sale['description'],
+				'warranty' => $sale['warranty'],
+				'total_price' => $sale['total_price'],
+				'sale_date' => date('Y-m-d H:i:s')
+			];
+
+			$this->SalesModel->add_sale($data);
+			$this->SalesModel->QuantityManage($sale['product_id'], $sale['quantity']);
+
+		}
+
+		// Send success response
+		echo json_encode(['success' => true, 'message' => 'Sales recorded successfully.']);
+
 	}
+
+
+
+
 	public function reports() {
 		// Load required models
 		$this->load->model('SalesModel');
