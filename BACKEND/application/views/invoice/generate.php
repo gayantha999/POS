@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Invoice #<?php echo $sale->id; ?></title>
+	<title>Invoice</title>
 	<style>
 		/* General Styling */
 		body {
@@ -129,9 +129,9 @@
 
 	<div class="details">
 		<h2>Invoice Details</h2>
-		<p><strong>Invoice #:</strong> <?php echo $sale->id; ?></p>
-		<p><strong>Date:</strong> <?php echo $sale->sale_date; ?></p>
-		<p><strong>Customer Name:</strong> <?php echo $sale->customer_name ?: 'Not Provided'; ?></p>
+		<p><strong>Invoice :</strong> <?php echo $invoice->invoice_number; ?></p>
+		<p><strong>Date:</strong> <?php echo $invoice->sale_date; ?></p>
+		<p><strong>Customer Name:</strong> <?php echo $invoice->customer_name ?: 'Not Provided'; ?></p>
 	</div>
 
 	<div class="details">
@@ -142,23 +142,23 @@
 				<th>Product</th>
 				<th>Quantity</th>
 				<th>Warranty</th>
-<!--				<th>Unit Price</th>-->
 				<th>Total</th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<td><?php echo $sale->product_name; ?></td>
-				<td><?php echo $sale->quantity; ?></td>
-				<td><?php echo $sale->warranty; ?></td>
-
-				<td><?php echo number_format($sale->total_price, 2); ?> LKR</td>
-			</tr>
+			<?php foreach ($products as $product): ?>
+				<tr>
+					<td><?php echo $product->product_name; ?></td>
+					<td><?php echo $product->quantity; ?></td>
+					<td><?php echo $product->warranty; ?></td>
+					<td><?php echo number_format($product->total_price, 2); ?> LKR</td>
+				</tr>
+			<?php endforeach; ?>
 			</tbody>
 		</table>
 
 		<div class="total">
-			<p>Total: <?php echo number_format($sale->total_price, 2); ?> LKR</p>
+			<p>Grand Total: <?php echo number_format($invoice->grand_total, 2); ?> LKR</p>
 		</div>
 	</div>
 

@@ -9,27 +9,35 @@ class Invoice extends CI_Controller {
 	}
 
 	// Generate an invoice for a specific sale
-	public function generate($sale_id) {
-		$sale = $this->SalesModel->get_sale_by_id($sale_id);
+	public function generate($invoice_number) {
 
-		if (!$sale) {
+		$invoice_data = $this->SalesModel->get_invoice_data($invoice_number);
+
+
+		if (!$invoice_data) {
 			show_404();
 		}
 
-		$data['sale'] = $sale;
+		$data['invoice'] = $invoice_data['invoice'];
+		$data['products'] = $invoice_data['products'];
+
+
 		$this->load->view('invoice/generate', $data);
 	}
 
 	// Download invoice as PDF
-	public function download($sale_id) {
-		$sale = $this->SalesModel->get_sale_by_id($sale_id);
+	public function download($invoice_number) {
+		$invoice_data = $this->SalesModel->get_invoice_data($invoice_number);
 
-		if (!$sale) {
+		if (!$invoice_data) {
 			show_404();
 		}
 
+		$data['invoice'] = $invoice_data['invoice'];
+		$data['products'] = $invoice_data['products'];
+
 		// Generate PDF content
-		$html_content = $this->load->view('invoice/generate', ['sale' => $sale], true);
+		$html_content = $this->load->view('invoice/generate', $data, true);
 
 		// Load the PDF library
 		$this->pdf->loadHtml($html_content);
@@ -37,6 +45,6 @@ class Invoice extends CI_Controller {
 		$this->pdf->render();
 
 		// Download the file
-		$this->pdf->stream('invoice_' . $sale_id . '.pdf', array("Attachment" => 1));
+		$this->pdf->stream('invoice_' . $invoice_number . '.pdf', array("Attachment" => 1));
 	}
 }

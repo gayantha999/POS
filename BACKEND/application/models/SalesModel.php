@@ -79,13 +79,38 @@ class SalesModel extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function get_sale_by_id($sale_id) {
-		$this->db->select('sales.*, products.name as product_name');
+//	public function get_sale_by_invoice_number($invoice_number) {
+//		$this->db->select('sales.*, products.name as product_name');
+//		$this->db->from('sales');
+//		$this->db->join('products', 'sales.product_id = products.product_id', 'left');
+//		$this->db->where('sales.invoice_number', $invoice_number);
+//
+//		return $this->db->get()->result();
+//	}
+	public function get_invoice_data($invoice_number) {
+
+		// Get invoice details
+		$this->db->select('sales.id as invoice_id, sales.invoice_number, sales.sale_date, sales.customer_name, SUM(sales.total_price) as grand_total');
+		$this->db->from('sales');
+		$this->db->where('sales.invoice_number', $invoice_number);
+		$invoice = $this->db->get()->row();
+
+		if (!$invoice) {
+			return false;
+		}
+
+		// Get products linked to the invoice
+		$this->db->select('products.name as product_name, sales.quantity, sales.warranty, sales.total_price');
 		$this->db->from('sales');
 		$this->db->join('products', 'sales.product_id = products.product_id', 'left');
-		$this->db->where('sales.id', $sale_id);
+		$this->db->where('sales.invoice_number', $invoice_number);
+		$products = $this->db->get()->result();
 
-		return $this->db->get()->row();
+
+		return [
+			'invoice' => $invoice,
+			'products' => $products
+		];
 	}
 
 	public function get_items()
