@@ -101,33 +101,33 @@
 	<h1>Sales Reports</h1>
 
 	<!-- Filter Form -->
-	<div class="card">
-		<form class="filter-form" action="<?php echo base_url('sales/filter_report'); ?>" method="get">
-			<div>
-				<label for="item_id">Filter by Item:</label>
-				<select id="item_id" name="item_id">
-					<option value="">All Items</option>
-					<?php foreach ($items as $item): ?>
-						<option value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</div>
-
-			<div>
-				<label for="month">Filter by Month:</label>
-				<select id="month" name="month">
-					<option value="">All Months</option>
-					<?php foreach ($months as $key => $value): ?>
-						<option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-					<?php endforeach; ?>
-				</select>
-			</div>
-
-			<div>
-				<button type="submit" class="btn">Filter</button>
-			</div>
-		</form>
-	</div>
+<!--	<div class="card">-->
+<!--		<form class="filter-form" action="--><?php //echo base_url('sales/filter_report'); ?><!--" method="get">-->
+<!--			<div>-->
+<!--				<label for="item_id">Filter by Item:</label>-->
+<!--				<select id="item_id" name="item_id">-->
+<!--					<option value="">All Items</option>-->
+<!--					--><?php //foreach ($items as $item): ?>
+<!--						<option value="--><?php //echo $item->id; ?><!--">--><?php //echo $item->name; ?><!--</option>-->
+<!--					--><?php //endforeach; ?>
+<!--				</select>-->
+<!--			</div>-->
+<!---->
+<!--			<div>-->
+<!--				<label for="month">Filter by Month:</label>-->
+<!--				<select id="month" name="month">-->
+<!--					<option value="">All Months</option>-->
+<!--					--><?php //foreach ($months as $key => $value): ?>
+<!--						<option value="--><?php //echo $key; ?><!--">--><?php //echo $value; ?><!--</option>-->
+<!--					--><?php //endforeach; ?>
+<!--				</select>-->
+<!--			</div>-->
+<!---->
+<!--			<div>-->
+<!--				<button type="submit" class="btn">Filter</button>-->
+<!--			</div>-->
+<!--		</form>-->
+<!--	</div>-->
 
 	<!-- Sales Summary -->
 	<div class="card">
