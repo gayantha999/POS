@@ -1,6 +1,10 @@
 <head>
 	<title>Sales Entry</title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 	<style>
 		body {
 			font-family: Arial, sans-serif;
@@ -97,7 +101,7 @@
 		<div class="sales-entry">
 			<div class="form-group">
 				<label for="product_id">Product:</label>
-				<select name="product_id[]" class="product_id" required>
+				<select name="product_id[]" class="product_id select2" required>
 					<option value="">Select Product</option>
 					<?php foreach ($products as $product): ?>
 						<option value="<?php echo $product->product_id; ?>" data-price="<?php echo $product->price; ?>">
@@ -155,6 +159,7 @@
 
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
+		
 		const salesEntries = document.getElementById('sales-entries');
 		const addRowButton = document.getElementById('add-row');
 		const submitSalesButton = document.getElementById('submit-sales');
