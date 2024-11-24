@@ -94,13 +94,21 @@
 			border: 1px solid #ccc;
 			border-radius: 5px;
 		}
+		.filter-form input[type="text"] {
+			padding: 10px;
+			font-size: 14px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+
+
 	</style>
 </head>
 <body>
 <div class="container">
 	<h1>Sales Reports</h1>
 
-	<!-- Filter Form -->
+<!--	<!-- Filter Form -->
 <!--	<div class="card">-->
 <!--		<form class="filter-form" action="--><?php //echo base_url('sales/filter_report'); ?><!--" method="get">-->
 <!--			<div>-->
