@@ -104,7 +104,7 @@
 				<select name="product_id[]" class="product_id select2" required>
 					<option value="">Select Product</option>
 					<?php foreach ($products as $product): ?>
-						<option value="<?php echo $product->product_id; ?>" data-price="<?php echo $product->price; ?>">
+						<option value="<?php echo $product->product_id; ?>" data-price="<?php echo $product->price; ?>" data-selling_price="<?php echo $product->selling_price; ?>">
 							<?php echo $product->name; ?>
 						</option>
 					<?php endforeach; ?>
@@ -116,7 +116,11 @@
 			</div>
 			<div class="form-group">
 				<label for="selling_price">Selling Price:</label>
-				<input type="number" class="selling_price" name="selling_price[]" step="0.01" required>
+				<input type="number" class="selling_price" name="selling_price[]" step="0.01" readonly>
+			</div>
+			<div class="form-group">
+				<label for="discount_price">Discount Price:</label>
+				<input type="number" class="discount_price" name="discount_price[]" step="0.01" required>
 			</div>
 			<div class="form-group">
 				<label for="quantity">Quantity:</label>
@@ -167,7 +171,7 @@
 		// Function to calculate total price
 		function calculateTotal(row) {
 			const quantity = parseFloat(row.querySelector('.quantity').value) || 0;
-			const sellingPrice = parseFloat(row.querySelector('.selling_price').value) || 0;
+			const sellingPrice = parseFloat(row.querySelector('.discount_price').value) || 0;
 			row.querySelector('.total_price').value = (quantity * sellingPrice).toFixed(2);
 		}
 
@@ -184,7 +188,9 @@
 			if (e.target.classList.contains('product_id')) {
 				const selectedOption = e.target.options[e.target.selectedIndex];
 				const price = selectedOption.getAttribute('data-price');
+				const selling_price = selectedOption.getAttribute('data-selling_price');
 				row.querySelector('.price').value = price || '';
+				row.querySelector('.selling_price').value = selling_price || '';
 				calculateTotal(row);
 			}
 		});
@@ -218,6 +224,7 @@
 				const product_id = row.querySelector('.product_id').value;
 				const price = row.querySelector('.price').value;
 				const selling_price = row.querySelector('.selling_price').value;
+				const discount_price = row.querySelector('.discount_price').value;
 				const quantity = row.querySelector('.quantity').value;
 				const payment_type =row.querySelector('.payment_method').value;
 				const customer_name =row.querySelector('.customer_name').value;
@@ -230,6 +237,7 @@
 						product_id,
 						price,
 						selling_price,
+						discount_price,
 						quantity,
 						payment_type,
 						customer_name,

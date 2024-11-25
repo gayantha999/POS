@@ -118,13 +118,23 @@
 				color: black;
 			}
 		}
+		.img_class {
+			width: 200px; /* Set your desired width */
+			height: auto; /* Maintain aspect ratio */
+			display: block;
+			margin: 0 auto;
+		}
 	</style>
 </head>
 <body>
 <div class="container">
 	<div class="header">
-		<h1>KD Mobile</h1>
-		<p class="subtitle">Computer-Generated Invoice</p>
+<!--		<h1>K.D. Mobile</h1>-->
+		<img class="imgclass" src="assets/IMG_6574.PNG" alt="K.D. Mobile Logo">
+		<div class="contact-info">
+			<span>0704619736 | 0723101699</span>
+			<span>No/33, New Shopping Complex, Mirigama</span>
+		</div>
 	</div>
 
 	<div class="details">
@@ -142,6 +152,8 @@
 				<th>Product</th>
 				<th>Quantity</th>
 				<th>Warranty</th>
+				<th>Selling Price</th>
+				<th>Discount_price</th>
 				<th>Total</th>
 			</tr>
 			</thead>
@@ -151,6 +163,8 @@
 					<td><?php echo $product->product_name; ?></td>
 					<td><?php echo $product->quantity; ?></td>
 					<td><?php echo $product->warranty; ?></td>
+					<td><?php echo $product->selling_price; ?></td>
+					<td><?php echo $product->discount_price; ?></td>
 					<td><?php echo number_format($product->total_price, 2); ?> LKR</td>
 				</tr>
 			<?php endforeach; ?>

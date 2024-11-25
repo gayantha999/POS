@@ -20,8 +20,6 @@ class Invoice extends CI_Controller {
 
 		$data['invoice'] = $invoice_data['invoice'];
 		$data['products'] = $invoice_data['products'];
-
-
 		$this->load->view('invoice/generate', $data);
 	}
 

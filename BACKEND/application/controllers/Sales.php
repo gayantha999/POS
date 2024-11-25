@@ -152,6 +152,7 @@ class Sales extends CI_Controller {
 				'product_id' => $sale['product_id'],
 				'price' => $sale['price'],
 				'selling_price' => $sale['selling_price'],
+				'discount_price' => $sale['discount_price'],
 				'quantity' => $sale['quantity'],
 				'payment_type' => $sale['payment_type'],
 				'customer_name' => $sale['customer_name'],

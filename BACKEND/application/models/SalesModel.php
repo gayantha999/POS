@@ -100,7 +100,7 @@ class SalesModel extends CI_Model {
 		}
 
 		// Get products linked to the invoice
-		$this->db->select('products.name as product_name, sales.quantity, sales.warranty, sales.total_price');
+		$this->db->select('products.name as product_name, sales.quantity, sales.warranty, sales.total_price,,sales.selling_price,sales.discount_price');
 		$this->db->from('sales');
 		$this->db->join('products', 'sales.product_id = products.product_id', 'left');
 		$this->db->where('sales.invoice_number', $invoice_number);
