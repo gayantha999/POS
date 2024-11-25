@@ -29,6 +29,7 @@ class Inventory extends CI_Controller {
 		// Validate input
 		$this->form_validation->set_rules('name', 'Name', 'required');
 		$this->form_validation->set_rules('price', 'Price', 'required|numeric');
+		$this->form_validation->set_rules('selling_price', 'Selling Price', 'required|numeric');
 		$this->form_validation->set_rules('stock', 'Stock', 'required|integer');
 		$this->form_validation->set_rules('low_stock_threshold', 'Low Stock Threshold', 'required|integer');
 
@@ -41,6 +42,7 @@ class Inventory extends CI_Controller {
 				'name' => $this->input->post('name'),
 				'category' => $this->input->post('category'),
 				'price' => $this->input->post('price'),
+				'selling_price' => $this->input->post('selling_price'),
 				'stock' => $this->input->post('stock'),
 				'low_stock_threshold' => $this->input->post('low_stock_threshold'),
 			];
@@ -71,6 +73,7 @@ class Inventory extends CI_Controller {
 		// Validate input
 		$this->form_validation->set_rules('name', 'Name', 'required');
 		$this->form_validation->set_rules('price', 'Price', 'required|numeric');
+		$this->form_validation->set_rules('selling_price', 'Selling Price', 'required|numeric');
 		$this->form_validation->set_rules('stock', 'Stock', 'required|integer');
 		$this->form_validation->set_rules('low_stock_threshold', 'Low Stock Threshold', 'required|integer');
 
@@ -84,6 +87,7 @@ class Inventory extends CI_Controller {
 				'name' => $this->input->post('name'),
 				'category' => $this->input->post('category'),
 				'price' => $this->input->post('price'),
+				'selling_price' => $this->input->post('selling_price'),
 				'stock' => $this->input->post('stock'),
 				'low_stock_threshold' => $this->input->post('low_stock_threshold')
 			];

@@ -167,6 +167,7 @@
 		<th>Name</th>
 		<th>Category</th>
 		<th>Price</th>
+		<th>Selling Price</th>
 		<th>Stock</th>
 		<th>Actions</th>
 	</tr>
@@ -178,6 +179,7 @@
 			<td><?php echo $product->name; ?></td>
 			<td><?php echo $product->category; ?></td>
 			<td><?php echo number_format($product->price, 2); ?></td>
+			<td><?php echo number_format($product->selling_price, 2); ?></td>
 			<td><?php echo $product->stock; ?></td>
 			<td>
 				<a href="<?php echo base_url('inventory/edit/'.$product->product_id); ?>">Edit</a>

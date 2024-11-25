@@ -148,6 +148,9 @@
 		<label for="price">Price:</label>
 		<input type="number" id="price" name="price" step="0.01" value="<?php echo set_value('price'); ?>" required>
 
+		<label for="selling_price">Selling Price:</label>
+		<input type="number" id="selling_price" name="selling_price" step="0.01" value="<?php echo set_value('selling_price'); ?>" required>
+
 		<label for="stock">Stock:</label>
 		<input type="number" id="stock" name="stock" value="<?php echo set_value('stock'); ?>" required>
 
