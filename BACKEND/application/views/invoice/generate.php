@@ -5,50 +5,50 @@
 	<style>
 		/* General Styling */
 		body {
-			font-family: 'Roboto', Arial, sans-serif;
+			font-family: 'Arial', sans-serif;
 			margin: 0;
-			padding: 20px;
-			background-color: #f9f9f9;
+			padding: 0;
+			background-color: #f5f5f5;
 			color: #333;
 		}
 
 		.container {
 			max-width: 800px;
-			margin: 0 auto;
+			margin: 20px auto;
 			background: #ffffff;
 			border: 1px solid #ddd;
 			border-radius: 8px;
 			padding: 20px;
-			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 		}
 
 		.header {
-			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 			border-bottom: 2px solid #007bff;
 			padding-bottom: 10px;
 			margin-bottom: 20px;
 		}
 
-		.header h1 {
-			margin: 0;
-			font-size: 24px;
-			color: #007bff;
+		.header .logo {
+			width: 150px;
+			height: auto;
 		}
 
-		.header .subtitle {
-			margin-top: 5px;
+		.header .contact-info {
+			text-align: right;
 			font-size: 14px;
 			color: #555;
-			font-style: italic;
 		}
 
-		.details {
-			margin-bottom: 20px;
+		.header .contact-info span {
+			display: block;
 		}
 
 		.details h2 {
-			font-size: 20px;
-			color: #333;
+			font-size: 18px;
+			color: #007bff;
 			border-bottom: 1px solid #ddd;
 			padding-bottom: 5px;
 			margin-bottom: 10px;
@@ -57,7 +57,6 @@
 		.details p {
 			margin: 5px 0;
 			font-size: 14px;
-			color: #555;
 		}
 
 		/* Table Styling */
@@ -75,8 +74,9 @@
 		}
 
 		table th {
-			background-color: #f4f4f4;
+			background-color: #f8f9fa;
 			color: #333;
+			text-align: center;
 		}
 
 		table td {
@@ -85,9 +85,10 @@
 
 		.total {
 			text-align: right;
-			font-size: 18px;
+			font-size: 16px;
 			font-weight: bold;
 			color: #333;
+			margin-top: 10px;
 		}
 
 		.footer {
@@ -97,10 +98,6 @@
 			border-top: 1px solid #ddd;
 			font-size: 12px;
 			color: #777;
-		}
-
-		.footer p {
-			margin: 5px 0;
 		}
 
 		/* Print Styling */
@@ -113,37 +110,29 @@
 				border: none;
 				box-shadow: none;
 			}
-
-			.header, .footer {
-				color: black;
-			}
-		}
-		.img_class {
-			width: 200px; /* Set your desired width */
-			height: auto; /* Maintain aspect ratio */
-			display: block;
-			margin: 0 auto;
 		}
 	</style>
 </head>
 <body>
 <div class="container">
+	<!-- Header Section -->
 	<div class="header">
-<!--		<h1>K.D. Mobile</h1>-->
-		<img class="imgclass" src="assets/IMG_6574.PNG" alt="K.D. Mobile Logo">
+		<img class="logo" src="http://localhost/POS/POS/BACKEND/assets/IMG_6574.PNG" alt="K.D. Mobile Logo">
 		<div class="contact-info">
-			<span>0704619736 | 0723101699</span>
-			<span>No/33, New Shopping Complex, Mirigama</span>
+			<span><strong>Contact:</strong> 0704619736 | 0723101699</span>
+			<span><strong>Address:</strong> No/33, New Shopping Complex, Mirigama</span>
 		</div>
 	</div>
 
+	<!-- Invoice Details Section -->
 	<div class="details">
 		<h2>Invoice Details</h2>
-		<p><strong>Invoice :</strong> <?php echo $invoice->invoice_number; ?></p>
+		<p><strong>Invoice Number:</strong> <?php echo $invoice->invoice_number; ?></p>
 		<p><strong>Date:</strong> <?php echo $invoice->sale_date; ?></p>
 		<p><strong>Customer Name:</strong> <?php echo $invoice->customer_name ?: 'Not Provided'; ?></p>
 	</div>
 
+	<!-- Product Details Section -->
 	<div class="details">
 		<h2>Product Details</h2>
 		<table>
@@ -153,7 +142,7 @@
 				<th>Quantity</th>
 				<th>Warranty</th>
 				<th>Selling Price</th>
-				<th>Discount_price</th>
+				<th>Discount Price</th>
 				<th>Total</th>
 			</tr>
 			</thead>
@@ -161,21 +150,21 @@
 			<?php foreach ($products as $product): ?>
 				<tr>
 					<td><?php echo $product->product_name; ?></td>
-					<td><?php echo $product->quantity; ?></td>
-					<td><?php echo $product->warranty; ?></td>
-					<td><?php echo $product->selling_price; ?></td>
-					<td><?php echo $product->discount_price; ?></td>
+					<td style="text-align: center;"><?php echo $product->quantity; ?></td>
+					<td style="text-align: center;"><?php echo $product->warranty; ?></td>
+					<td><?php echo number_format($product->selling_price, 2); ?> LKR</td>
+					<td><?php echo number_format($product->discount_price, 2); ?> LKR</td>
 					<td><?php echo number_format($product->total_price, 2); ?> LKR</td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
 		</table>
-
 		<div class="total">
 			<p>Grand Total: <?php echo number_format($invoice->grand_total, 2); ?> LKR</p>
 		</div>
 	</div>
 
+	<!-- Footer Section -->
 	<div class="footer">
 		<p>This is a computer-generated invoice; no signature is required.</p>
 		<p>Thank you for shopping at KD Mobile!</p>

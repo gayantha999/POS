@@ -246,9 +246,9 @@
 				<td><?php echo $sale->warranty ?: 'N/A'; ?></td>
 				<td><?php echo $sale->sale_date; ?></td>
 				<td>
-<!--					<a href="--><?php //echo base_url('invoice/generate/' . $sale->invoice_number); ?><!--" class="action-btn view-btn">-->
-<!--						<i class="fas fa-eye"></i>-->
-<!--					</a><br>-->
+					<a href="<?php echo base_url('invoice/generate/' . $sale->invoice_number); ?>" class="action-btn view-btn">
+						<i class="fas fa-eye"></i>
+					</a><br>
 					<a href="<?php echo base_url('invoice/download/' . $sale->invoice_number); ?>" class="action-btn download-btn">
 						<i class="fas fa-download"></i>
 					</a>
