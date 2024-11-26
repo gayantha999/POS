@@ -196,6 +196,15 @@ class Sales extends CI_Controller {
 		$this->load->model('SalesModel');
 		$sales_data = $this->SalesModel->get_all_sales();
 
+		// Calculate totals
+		$total_price = 0;
+		$total_discount_price = 0;
+
+		foreach ($sales_data as $line) {
+			$total_price += $line->price;
+			$total_discount_price += $line->discount_price;
+		}
+
 		// File name
 		$filename = 'sales_report_' . date('Ymd') . '.csv';
 		header("Content-Description: File Transfer");
@@ -204,12 +213,18 @@ class Sales extends CI_Controller {
 
 		// File creation
 		$file = fopen('php://output', 'w');
-		$header = ['Sale ID', 'Product Number', 'Quantity','price','selling_price','discount_price', 'Total Price', 'Customer Name', 'Sale Date','Item Name'];
+		$header = ['Invoice Number', 'Product', 'Price', 'Selling Price', 'Discount Price', 'Total Price'];
 		fputcsv($file, $header);
 
 		foreach ($sales_data as $line) {
 			fputcsv($file, (array) $line);
 		}
+
+		// Add totals row
+		$totals_row = ['Totals', '', $total_price, '', '', $total_discount_price, '', '', '', ''];
+		
+		fputcsv($file, $totals_row);
+
 		fclose($file);
 		exit;
 	}
@@ -218,6 +233,15 @@ class Sales extends CI_Controller {
 		$this->load->library('pdf');
 		$this->load->model('SalesModel');
 		$sales_data = $this->SalesModel->get_all_sales_pdf();
+
+		// Calculate totals
+		$total_price = 0;
+		$total_discount_price = 0;
+
+		foreach ($sales_data as $line) {
+			$total_price += $line->price;
+			$total_discount_price += $line->discount_price;
+		}
 
 		// Generate PDF content
 		$html_content = '<h1>Sales Report</h1>';
@@ -251,6 +275,12 @@ class Sales extends CI_Controller {
 		}
 		$html_content .= '</tbody>';
 		$html_content .= '</table>';
+
+		// Append totals
+		$html_content .= '<h3>Total Price: ' . $total_price . '</h3>';
+		$html_content .= '<h3>Total Discount Price: ' . $total_discount_price . '</h3>';
+		$profit = $total_discount_price -$total_price;
+		$html_content .= '<h3>Profit: ' . $profit . '</h3>';
 
 		// Load PDF library and render
 		$this->pdf->loadHtml($html_content);

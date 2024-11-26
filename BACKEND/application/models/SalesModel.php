@@ -12,7 +12,7 @@ class SalesModel extends CI_Model {
 	}
 
 	public function get_all_sales() {
-		$this->db->select('sales.*, products.name as product_name');
+		$this->db->select('sales.invoice_number, products.name as product_name,sales.price,sales.selling_price,sales.discount_price,sales.total_price');
 		$this->db->from('sales');
 		$this->db->join('products', 'sales.product_id = products.product_id');
 		$this->db->order_by('sale_date', 'DESC');
