@@ -3,6 +3,8 @@
 <head>
 	<title>Sales List</title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 
 	<style>
 		/* General Styles */
@@ -180,7 +182,9 @@
 		.download-btn {
 			background-color: #28a745;
 		}
-
+.whatsapp-btn {
+	background-color: #28a745;
+}
 		.action-btn:hover {
 			opacity: 0.8;
 		}
@@ -221,11 +225,13 @@
 			<th>Product</th>
 			<th>Price</th>
 			<th>Selling Price</th>
+			<th>Discount Price</th>
 			<th>Quantity</th>
 			<th>Total Price</th>
 			<th>Payment Type</th>
 			<th>Customer Name</th>
 			<th>Description</th>
+			<th>Mobile</th>
 			<th>Warranty</th>
 			<th>Date</th>
 		</tr>
@@ -238,11 +244,13 @@
 				<td><?php echo $sale->product_name; ?></td>
 				<td><?php echo $sale->price; ?></td>
 				<td><?php echo $sale->selling_price; ?></td>
+				<td><?php echo $sale->discount_price; ?></td>
 				<td><?php echo $sale->quantity; ?></td>
 				<td><?php echo $sale->total_price; ?></td>
 				<td><?php echo $sale->payment_type; ?></td>
 				<td><?php echo $sale->customer_name ?: 'N/A'; ?></td>
 				<td><?php echo $sale->description ?: 'N/A'; ?></td>
+				<td><?php echo $sale->mobile_number ?: 'N/A'; ?></td>
 				<td><?php echo $sale->warranty ?: 'N/A'; ?></td>
 				<td><?php echo $sale->sale_date; ?></td>
 				<td>
@@ -252,7 +260,7 @@
 					<a href="<?php echo base_url('invoice/download/' . $sale->invoice_number); ?>" class="action-btn download-btn">
 						<i class="fas fa-download"></i>
 					</a>
-					<a href="<?php echo base_url('invoice/sendInvoice/' . $sale->invoice_number); ?>" class="action-btn view-btn">
+					<a href="<?php echo base_url('invoice/sendInvoice/' . $sale->invoice_number); ?>" class="action-btn whatsapp-btn">
 						<i class="fa fa-whatsapp"></i>
 					</a>
 

@@ -90,7 +90,7 @@ class SalesModel extends CI_Model {
 	public function get_invoice_data($invoice_number) {
 
 		// Get invoice details
-		$this->db->select('sales.id as invoice_id, sales.invoice_number, sales.sale_date, sales.customer_name, SUM(sales.total_price) as grand_total,sales.description');
+		$this->db->select('sales.id as invoice_id, sales.invoice_number, sales.sale_date, sales.customer_name, SUM(sales.total_price) as grand_total,sales.mobile_number');
 		$this->db->from('sales');
 		$this->db->where('sales.invoice_number', $invoice_number);
 		$invoice = $this->db->get()->row();

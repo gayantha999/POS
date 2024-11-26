@@ -157,6 +157,7 @@ class Sales extends CI_Controller {
 				'payment_type' => $sale['payment_type'],
 				'customer_name' => $sale['customer_name'],
 				'description' => $sale['description'],
+				'mobile_number' => $sale['mobile_number'],
 				'warranty' => $sale['warranty'],
 				'total_price' => $sale['total_price'],
 				'sale_date' => date('Y-m-d H:i:s')
@@ -203,7 +204,7 @@ class Sales extends CI_Controller {
 
 		// File creation
 		$file = fopen('php://output', 'w');
-		$header = ['Sale ID', 'Product Number', 'Quantity','price','selling_price', 'Total Price', 'Customer Name', 'Sale Date','Item Name'];
+		$header = ['Sale ID', 'Product Number', 'Quantity','price','selling_price','discount_price', 'Total Price', 'Customer Name', 'Sale Date','Item Name'];
 		fputcsv($file, $header);
 
 		foreach ($sales_data as $line) {
@@ -226,6 +227,9 @@ class Sales extends CI_Controller {
                             <th>Sale ID</th>
                             <th>Product Name</th>
                             <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Selling Price</th>
+                            <th>Discount Price</th>
                             <th>Total Price</th>
                             <th>Customer Name</th>
                             <th>Sale Date</th>
@@ -237,6 +241,9 @@ class Sales extends CI_Controller {
 			$html_content .= '<td>' . $line->id . '</td>';
 			$html_content .= '<td>' . $line->product_name . '</td>';
 			$html_content .= '<td>' . $line->quantity . '</td>';
+			$html_content .= '<td>' . $line->price . '</td>';
+			$html_content .= '<td>' . $line->selling_price . '</td>';
+			$html_content .= '<td>' . $line->discount_price . '</td>';
 			$html_content .= '<td>' . $line->total_price . '</td>';
 			$html_content .= '<td>' . $line->customer_name . '</td>';
 			$html_content .= '<td>' . $line->sale_date . '</td>';

@@ -139,6 +139,10 @@
 				<input type="text" class="description" name="description[]">
 			</div>
 			<div class="form-group">
+				<label for="mobile_number">Mobile Number:</label>
+				<input type="number" class="mobile_number" name="mobile_number[]">
+			</div>
+			<div class="form-group">
 				<label for="warranty">Warranty:</label>
 				<input type="text" class="warranty" name="warranty[]">
 			</div>
@@ -229,6 +233,7 @@
 				const payment_type =row.querySelector('.payment_method').value;
 				const customer_name =row.querySelector('.customer_name').value;
 				const description =row.querySelector('.description').value;
+				const mobile_number =row.querySelector('.mobile_number').value;
 				const warranty =row.querySelector('.warranty').value;
 				const total_price = row.querySelector('.total_price').value;
 
@@ -242,6 +247,7 @@
 						payment_type,
 						customer_name,
 						description,
+						mobile_number,
 						warranty,
 						total_price,
 					});

@@ -46,18 +46,19 @@ class Invoice extends CI_Controller {
 		$this->pdf->stream('invoice_' . $invoice_number . '.pdf', array("Attachment" => 1));
 	}
 
-	public function sendInvoice($invoice_number){
+	public function sendInvoice($invoice_number)
+	{
+		// Fetch invoice data
 		$invoice_data = $this->SalesModel->get_invoice_data($invoice_number);
 
 		if (!$invoice_data) {
-			show_404();
+			show_404(); // Handle error if the invoice doesn't exist
 		}
 
-		$data['invoice'] = $invoice_data['invoice'];
-		$data['whatsapp_url'] = "https://wa.me/" . $data['invoice']->description;
+		// Generate WhatsApp URL
+		$whatsapp_url = "https://wa.me/" . $invoice_data['invoice']->mobile_number;
 
-		// Load a view and pass the WhatsApp URL
-		$this->load->view('invoice/send_invoice_view', $data);
-
+		// Redirect to WhatsApp URL
+		redirect($whatsapp_url);
 	}
 }
