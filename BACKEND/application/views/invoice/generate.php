@@ -117,7 +117,7 @@
 <div class="container">
 	<!-- Header Section -->
 	<div class="header">
-<!--		<img class="logo" src="http://localhost/POS/POS/BACKEND/assets/IMG_6574.PNG" alt="K.D. Mobile Logo">-->
+		<img class="logo" src="http://localhost/POS/POS/BACKEND/assets/IMG_6574.PNG" >
 		<div class="contact-info">
 			<span><strong>Contact:</strong> 0704619736 | 0723101699</span>
 			<span><strong>Address:</strong> No/33, New Shopping Complex, Mirigama</span>
