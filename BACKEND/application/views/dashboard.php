@@ -129,7 +129,8 @@
 </div>
 
 <div class="footer">
-	<p>&copy; <?php echo date('Y'); ?> Mobile Shop POS System</p>
+	<p>&copy; <?php echo date('Y'); ?> InfinityPOS System</p>
+	<p>+94765573107</p>
 </div>
 
 <!-- FontAwesome Icons -->

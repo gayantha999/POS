@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Login - InfinityPOS</title>
 	<style>
 		/* General Styles */
 		body {
@@ -31,6 +31,10 @@
 			color: #00d4ff;
 			margin-bottom: 25px;
 			font-weight: bold;
+		}
+
+		h2 span {
+			color: #6c63ff; /* Accent color for InfinityPOS */
 		}
 
 		/* Form Styles */
@@ -89,7 +93,7 @@
 </head>
 <body>
 <div class="login-container">
-	<h2>Login</h2>
+	<h2>Welcome to <span>InfinityPOS</span></h2>
 	<form id="loginForm">
 		<label for="username">Username:</label>
 		<input type="text" id="username" name="username" placeholder="Enter your username" required>
