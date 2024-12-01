@@ -24,7 +24,7 @@
 		/* Dashboard Container */
 		.dashboard-container {
 			max-width: 1200px;
-			margin: 50px auto;
+			margin: 250px auto;
 			padding: 30px;
 			background: #282c34; /* Dark card background */
 			border-radius: 15px;
@@ -129,8 +129,8 @@
 </div>
 
 <div class="footer">
-	<p>&copy; <?php echo date('Y'); ?> InfinityPOS System</p>
-	<p>+94765573107</p>
+	<p>&copy; <?php echo date('Y'); ?> InfinityPOS System | +94765573107</p>
+
 </div>
 
 <!-- FontAwesome Icons -->

@@ -8,8 +8,8 @@
 			font-family: 'Arial', sans-serif;
 			margin: 0;
 			padding: 0;
-			background: linear-gradient(135deg, #1e1e2f, #27293d);
-			color: #fff;
+			background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+			color: #333;
 			height: 100vh;
 			display: flex;
 			justify-content: center;
@@ -18,60 +18,75 @@
 
 		/* Login Container */
 		.login-container {
-			background: #2c2f4a;
-			padding: 30px 40px;
-			border-radius: 12px;
-			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+			background: #ffffff;
+			padding: 40px;
+			border-radius: 15px;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 			width: 100%;
 			max-width: 400px;
+			text-align: center;
 		}
 
+		/* Title */
 		h2 {
-			text-align: center;
-			color: #00d4ff;
-			margin-bottom: 25px;
+			font-size: 28px;
 			font-weight: bold;
+			color: #007bff;
+			margin-bottom: 10px;
 		}
 
 		h2 span {
 			color: #6c63ff; /* Accent color for InfinityPOS */
 		}
 
+		p.subtitle {
+			font-size: 14px;
+			color: #666;
+			margin-bottom: 25px;
+		}
+
 		/* Form Styles */
 		form {
 			display: flex;
 			flex-direction: column;
+			align-items: center;
 		}
 
 		label {
 			font-size: 14px;
 			margin-bottom: 5px;
-			color: #aaa;
+			color: #555;
+			text-align: left;
+			width: 100%;
 		}
 
 		input {
-			padding: 12px;
+			width: 100%;
+			padding: 12px 15px;
 			margin-bottom: 20px;
-			border: none;
-			border-radius: 6px;
+			border: 1px solid #ced4da;
+			border-radius: 8px;
 			font-size: 16px;
-			background: #44465e;
-			color: #fff;
+			background: #f8f9fa;
+			color: #495057;
+			transition: all 0.3s ease;
 		}
 
 		input:focus {
 			outline: none;
-			box-shadow: 0 0 8px #00d4ff;
-			background: #3b3d56;
+			border-color: #007bff;
+			box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+			background: #fff;
 		}
 
 		/* Button Styles */
 		button {
-			padding: 12px;
+			width: 100%;
+			padding: 14px;
 			font-size: 16px;
 			font-weight: bold;
 			color: #fff;
-			background: linear-gradient(135deg, #3a3dff, #6c63ff);
+			background: linear-gradient(135deg, #007bff, #0056b3);
 			border: none;
 			border-radius: 8px;
 			cursor: pointer;
@@ -80,31 +95,47 @@
 
 		button:hover {
 			transform: translateY(-3px);
-			box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4);
+			box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+		}
+
+		button:active {
+			transform: translateY(1px);
+			box-shadow: none;
 		}
 
 		/* Message Styles */
 		#message {
 			margin-top: 10px;
-			text-align: center;
 			font-size: 14px;
+			color: #e74c3c;
+		}
+
+		/* Footer */
+		.footer {
+			margin-top: 20px;
+			font-size: 12px;
+			color: #aaa;
 		}
 	</style>
 </head>
 <body>
 <div class="login-container">
 	<h2>Welcome to <span>InfinityPOS</span></h2>
+	<p class="subtitle">Please login to access your dashboard</p>
 	<form id="loginForm">
-		<label for="username">Username:</label>
+		<label for="username">Username</label>
 		<input type="text" id="username" name="username" placeholder="Enter your username" required>
 
-		<label for="password">Password:</label>
+		<label for="password">Password</label>
 		<input type="password" id="password" name="password" placeholder="Enter your password" required>
 
 		<button type="submit">Login</button>
 	</form>
 
 	<p id="message"></p>
+	<div class="footer">
+		<p>© 2024 InfinityPOS. All rights reserved.</p>
+	</div>
 </div>
 
 <script>
@@ -127,7 +158,7 @@
 			.then(data => {
 				const messageElement = document.getElementById('message');
 				if (data.status === 'success') {
-					messageElement.style.color = 'lightgreen';
+					messageElement.style.color = 'green';
 					messageElement.textContent = data.message;
 					// Redirect to a dashboard or another page on successful login
 					setTimeout(() => {
