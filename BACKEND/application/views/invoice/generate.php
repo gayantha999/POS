@@ -128,7 +128,7 @@
 	<div class="details">
 		<h2>Invoice Details</h2>
 		<p><strong>Invoice Number:</strong> <?php echo $invoice->invoice_number; ?></p>
-		<p><strong>Date:</strong> <?php echo $invoice->sale_date; ?></p>
+		<p><strong>Date:</strong> <?php echo date('d-m-Y', strtotime($invoice->sale_date)); ?></p>
 		<p><strong>Customer Name:</strong> <?php echo $invoice->customer_name ?: 'Not Provided'; ?></p>
 	</div>
 

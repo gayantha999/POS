@@ -42,6 +42,7 @@ class Invoice extends CI_Controller {
 		$this->pdf->setPaper('A4', 'portrait');
 		$this->pdf->render();
 
+
 		// Download the file
 		$this->pdf->stream('invoice_' . $invoice_number . '.pdf', array("Attachment" => 1));
 	}
