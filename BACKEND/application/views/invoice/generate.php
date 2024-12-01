@@ -117,7 +117,15 @@
 <div class="container">
 	<!-- Header Section -->
 	<div class="header">
-		<img class="logo" src="http://localhost/POS/POS/BACKEND/assets/IMG_6574.PNG" >
+<!--		<img class="logo" src="http://localhost/POS/POS/BACKEND/assets/IMG_6574.PNG" >-->
+		<?php
+		$image_path = FCPATH . 'assets/IMG_6574.PNG';
+		$image_data = base64_encode(file_get_contents($image_path));
+		$mime_type = mime_content_type($image_path);
+		?>
+		<img class="logo" src="data:<?php echo $mime_type; ?>;base64,<?php echo $image_data; ?>" alt="Logo">
+
+
 		<div class="contact-info">
 			<span><strong>Contact:</strong> 0704619736 | 0723101699</span>
 			<span><strong>Address:</strong> No/33, New Shopping Complex, Mirigama</span>
