@@ -165,7 +165,38 @@ class Sales extends CI_Controller {
 			];
 
 			$this->SalesModel->add_sale($data);
-			$this->SalesModel->QuantityManage($sale['product_id'], $sale['quantity']);
+			$stock = $this->SalesModel->QuantityManage($sale['product_id'], $sale['quantity']);
+//			if($stock === false){
+//				print_r('refill');
+//				$this->load->library('email');
+//
+//				// Email configuration
+//				$config = array(
+//					'protocol'  => 'smtp',
+//					'smtp_host' => 'your_smtp_host', // Replace with your SMTP host
+//					'smtp_user' => 'your_email@example.com', // Replace with your email
+//					'smtp_pass' => 'your_password', // Replace with your email password
+//					'smtp_port' => 587, // Replace with your SMTP port (usually 587 for TLS)
+//					'mailtype'  => 'html',
+//					'charset'   => 'utf-8',
+//					'wordwrap'  => true
+//				);
+//				$this->email->initialize($config);
+//
+//				// Set email parameters
+//				$this->email->from('your_email@example.com', 'Your Company'); // Replace with your email and name
+//				$this->email->to('stock_manager@example.com'); // Replace with the recipient email
+//				$this->email->subject('Stock Limit Alert');
+//				$this->email->message('The stock for Product ID: ' . $sale['product_id'] . ' is below the required limit. Please refill.');
+//
+//				// Send the email
+//				if ($this->email->send()) {
+//					log_message('info', 'Stock alert email sent successfully.');
+//				} else {
+//					log_message('error', 'Failed to send stock alert email.');
+//				}
+//			}
+
 
 		}
 

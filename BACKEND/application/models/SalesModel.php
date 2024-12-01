@@ -209,7 +209,7 @@ class SalesModel extends CI_Model {
 	public function QuantityManage($id,$quantity){
 
 		// Retrieve the current quantity of the product
-		$this->db->select('stock');
+		$this->db->select('stock,low_stock_threshold');
 		$this->db->from('products');
 		$this->db->where('product_id', $id);
 		$product = $this->db->get()->row();
@@ -218,7 +218,7 @@ class SalesModel extends CI_Model {
 		// Calculate the new quantity
 		$newQuantity = $product->stock - $quantity;
 
-		if ($newQuantity < 0) {
+		if ($newQuantity <= $product->low_stock_threshold) {
 			return false; // Insufficient stock
 		}
 
