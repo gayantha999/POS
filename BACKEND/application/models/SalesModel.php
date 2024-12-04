@@ -214,12 +214,16 @@ class SalesModel extends CI_Model {
 		$this->db->where('product_id', $id);
 		$product = $this->db->get()->row();
 
-//		var_dump($product);die();
+
 		// Calculate the new quantity
 		$newQuantity = $product->stock - $quantity;
 
+
 		if ($newQuantity <= $product->low_stock_threshold) {
-			return false; // Insufficient stock
+			 // Insufficient stock
+			$this->db->where('product_id', $id);
+			$this->db->update('products', ['stock' => $newQuantity]);
+			return false;
 		}
 
 		// Update the product quantity in the database
