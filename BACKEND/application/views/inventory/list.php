@@ -1,195 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Product Inventory</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 	<style>
-		/* General Styles */
+		/* Additional Styles */
 		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 20px;
-			background-color: #f4f6f9;
+			font-family: 'Inter', Arial, sans-serif;
+			background-color: #f8f9fa;
 		}
 
 		h1 {
+			margin: 20px 0;
+			color: #0d6efd;
 			text-align: center;
-			color: #333;
-			margin-bottom: 20px;
 		}
 
-		/* Table Styles */
-		table {
-			width: 100%;
-			border-collapse: collapse;
-			margin: 20px 0;
+		.table-container {
 			background: #fff;
-			border-radius: 8px;
-			overflow: hidden;
+			padding: 20px;
+			border-radius: 10px;
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		}
 
-		th, td {
-			padding: 12px 15px;
-			text-align: left;
+		.btn-custom {
+			border-radius: 50px;
+			transition: all 0.3s ease;
 		}
 
-		th {
-			background-color: #007bff;
+		.btn-custom:hover {
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		.table th {
+			background-color: #0d6efd;
 			color: white;
 			text-transform: uppercase;
-			font-size: 14px;
 		}
 
-		tr:nth-child(even) {
-			background-color: #f2f2f2;
+		.table tr:hover {
+			background-color: #e9f5ff;
 		}
 
-		tr:hover {
-			background-color: #d4e3ff;
-		}
-
-		td a {
-			text-decoration: none;
-			padding: 8px 12px;
-			color: #fff;
-			background-color: #28a745;
-			border-radius: 5px;
-			font-size: 14px;
-			margin-right: 5px;
-		}
-
-		td a:hover {
-			background-color: #218838;
-		}
-
-		.delete {
-			background-color: #dc3545;
-		}
-
-		.delete:hover {
-			background-color: #c82333;
-		}
-
-		/* Add Button */
-		.add-button {
-			display: inline-block;
-			padding: 10px 20px;
-			font-size: 16px;
-			font-weight: bold;
-			color: #fff;
-			background-color: #007bff;
-			text-align: center;
-			border-radius: 5px;
-			text-decoration: none;
-			margin-bottom: 20px;
-			box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
-		}
-
-		.add-button:hover {
-			background-color: #0056b3;
-		}
-
-		/* Flash Message */
 		.flash-message {
-			color: green;
 			font-weight: bold;
 			text-align: center;
-			margin-bottom: 20px;
-		}
-		/* General button styles */
-		a.back-link,
-		a.add-button {
-			display: inline-block;
-			padding: 10px 20px;
-			font-size: 16px;
-			color: #fff;
-			text-decoration: none;
-			border-radius: 5px;
-			transition: all 0.3s ease;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		}
-
-		/* Specific styles for Back to Inventory button */
-		a.back-link {
-			background-color: #007bff; /* Red color */
-		}
-
-		a.back-link:hover {
-			background-color: #007bff; /* Darker red on hover */
-			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-		}
-
-		/* Specific styles for Dashboard button */
-		a.add-button {
-			background-color: #4caf50; /* Green color */
-		}
-
-		a.add-button:hover {
-			background-color: #388e3c; /* Darker green on hover */
-			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-		}
-
-		/* Optional: Container for alignment */
-		.button-container {
-			display: flex;
-			justify-content: center;
-			gap: 20px; /* Space between buttons */
-			margin-top: 20px;
+			color: green;
 		}
 	</style>
 </head>
 <body>
-<h1>Product Inventory</h1>
 
-<!-- Add New Product Button -->
-<a class="add-button" href="<?php echo base_url('inventory/add'); ?>">Add New Product</a>
+<div class="container my-5">
+	<!-- Heading -->
+	<h1>Product Inventory</h1>
 
-<a class="back-link" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
-
-
-<form method="get" action="<?php echo base_url('inventory'); ?>" style="margin-bottom: 20px;">
-	<input type="text" name="search" placeholder="Search by name" value="<?php echo $this->input->get('search'); ?>" style="padding: 8px; font-size: 14px;">
-	<button type="submit" style="padding: 8px 16px; font-size: 14px; background-color: #007bff; color: #fff; border: none; border-radius: 5px;">Filter</button>
-	<a href="<?php echo base_url('inventory'); ?>" style="padding: 8px 16px; font-size: 14px; background-color: #6c757d; color: #fff; border: none; border-radius: 5px; text-decoration: none;">Reset</a>
-</form>
-<!-- Flash Message -->
-<?php if ($this->session->flashdata('message')): ?>
-	<div class="flash-message">
-		<?php echo $this->session->flashdata('message'); ?>
+	<!-- Add Product and Back to Dashboard Buttons -->
+	<div class="d-flex justify-content-between mb-4">
+		<a href="<?php echo base_url('inventory/add'); ?>" class="btn btn-primary btn-custom">Add New Product</a>
+		<a href="<?php echo base_url('dashboard'); ?>" class="btn btn-secondary btn-custom">Dashboard</a>
 	</div>
-<?php endif; ?>
 
-<!-- Inventory Table -->
-<table>
-	<thead>
-	<tr>
-		<th>ID</th>
-		<th>Name</th>
-		<th>Category</th>
-		<th>Price</th>
-		<th>Selling Price</th>
-		<th>Stock</th>
-		<th>Actions</th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($products as $product): ?>
-		<tr>
-			<td><?php echo $product->product_id; ?></td>
-			<td><?php echo $product->name; ?></td>
-			<td><?php echo $product->category; ?></td>
-			<td><?php echo number_format($product->price, 2); ?></td>
-			<td><?php echo number_format($product->selling_price, 2); ?></td>
-			<td><?php echo $product->stock; ?></td>
-			<td>
-				<a href="<?php echo base_url('inventory/edit/'.$product->product_id); ?>">Edit</a>
-				<a href="<?php echo base_url('inventory/delete/'.$product->product_id); ?>"
-				   class="delete"
-				   onclick="return confirm('Delete this product?')">Delete</a>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</tbody>
-</table>
+	<!-- Search and Filter -->
+	<form method="get" action="<?php echo base_url('inventory'); ?>" class="d-flex mb-4">
+		<input type="text" name="search" placeholder="Search by name" value="<?php echo $this->input->get('search'); ?>" class="form-control me-2">
+		<button type="submit" class="btn btn-primary btn-custom me-2">Filter</button>
+		<a href="<?php echo base_url('inventory'); ?>" class="btn btn-secondary btn-custom">Reset</a>
+	</form>
+
+	<!-- Flash Message -->
+	<?php if ($this->session->flashdata('message')): ?>
+		<div class="alert alert-success text-center">
+			<?php echo $this->session->flashdata('message'); ?>
+		</div>
+	<?php endif; ?>
+
+	<!-- Inventory Table -->
+	<div class="table-container">
+		<table class="table table-hover table-striped align-middle">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Category</th>
+				<th>Price</th>
+				<th>Selling Price</th>
+				<th>Stock</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach ($products as $product): ?>
+				<tr>
+					<td><?php echo $product->product_id; ?></td>
+					<td><?php echo $product->name; ?></td>
+					<td><?php echo $product->category; ?></td>
+					<td><?php echo number_format($product->price, 2); ?></td>
+					<td><?php echo number_format($product->selling_price, 2); ?></td>
+					<td><?php echo $product->stock; ?></td>
+					<td>
+						<a href="<?php echo base_url('inventory/edit/'.$product->product_id); ?>" class="btn btn-success btn-sm btn-custom">Edit</a>
+						<a href="<?php echo base_url('inventory/delete/'.$product->product_id); ?>" class="btn btn-danger btn-sm btn-custom"
+						   onclick="return confirm('Delete this product?')">Delete</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

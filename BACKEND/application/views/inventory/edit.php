@@ -2,125 +2,67 @@
 <html>
 <head>
 	<title>Edit Product</title>
-	<style>
-		/* General Styles */
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 20px;
-			background-color: #f4f6f9;
-		}
-
-		h1 {
-			text-align: center;
-			color: #333;
-			margin-bottom: 20px;
-		}
-
-		/* Form Container */
-		.form-container {
-			max-width: 600px;
-			margin: 0 auto;
-			background: #fff;
-			padding: 20px;
-			border-radius: 8px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		}
-
-		/* Labels and Inputs */
-		label {
-			display: block;
-			font-weight: bold;
-			margin-bottom: 8px;
-			color: #555;
-		}
-
-		input[type="text"],
-		input[type="number"] {
-			width: 100%;
-			padding: 10px;
-			margin-bottom: 20px;
-			border: 1px solid #ddd;
-			border-radius: 4px;
-			font-size: 14px;
-		}
-
-		input[type="number"]::-webkit-inner-spin-button {
-			margin: 0;
-		}
-
-		input:focus {
-			border-color: #007bff;
-			outline: none;
-		}
-
-		/* Buttons */
-		.btn {
-			display: inline-block;
-			padding: 10px 20px;
-			font-size: 16px;
-			font-weight: bold;
-			text-align: center;
-			text-decoration: none;
-			color: #fff;
-			border-radius: 5px;
-			background-color: #007bff;
-			box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
-			cursor: pointer;
-		}
-
-		.btn:hover {
-			background-color: #0056b3;
-		}
-
-		.btn-secondary {
-			background-color: #6c757d;
-		}
-
-		.btn-secondary:hover {
-			background-color: #5a6268;
-		}
-
-		/* Error Message */
-		.error-message {
-			color: red;
-			font-weight: bold;
-			margin-bottom: 20px;
-		}
-	</style>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Edit Product</h1>
-<div class="form-container">
-	<a class="btn btn-secondary" href="<?php echo base_url('inventory'); ?>">Back to Inventory</a>
-
-	<?php if (validation_errors()): ?>
-		<div class="error-message">
-			<?php echo validation_errors(); ?>
+<body style="background: #f8f9fa;">
+<div class="container mt-5">
+	<div class="card shadow">
+		<div class="card-header bg-primary text-white text-center">
+			<h1>Edit Product</h1>
 		</div>
-	<?php endif; ?>
+		<div class="card-body">
+			<!-- Back Button -->
+			<div class="mb-4">
+				<a class="btn btn-secondary" href="<?php echo base_url('inventory'); ?>">Back to Inventory</a>
+			</div>
 
-	<form action="<?php echo base_url('inventory/update/' . $product->product_id); ?>" method="post">
-		<label for="name">Product Name:</label>
-		<input type="text" id="name" name="name" value="<?php echo set_value('name', $product->name); ?>" required>
+			<!-- Error Messages -->
+			<?php if (validation_errors()): ?>
+				<div class="alert alert-danger">
+					<?php echo validation_errors(); ?>
+				</div>
+			<?php endif; ?>
 
-		<label for="category">Category:</label>
-		<input type="text" id="category" name="category" value="<?php echo set_value('category', $product->category); ?>">
+			<!-- Edit Product Form -->
+			<form action="<?php echo base_url('inventory/update/' . $product->product_id); ?>" method="post">
+				<div class="mb-3">
+					<label for="name" class="form-label">Product Name:</label>
+					<input type="text" id="name" name="name" class="form-control" value="<?php echo set_value('name', $product->name); ?>" required>
+				</div>
 
-		<label for="price">Price:</label>
-		<input type="number" id="price" name="price" step="0.01" value="<?php echo set_value('price', $product->price); ?>" required>
+				<div class="mb-3">
+					<label for="category" class="form-label">Category:</label>
+					<input type="text" id="category" name="category" class="form-control" value="<?php echo set_value('category', $product->category); ?>">
+				</div>
 
-		<label for="selling_price">Selling Price:</label>
-		<input type="number" id="selling_price" name="selling_price" step="0.01" value="<?php echo set_value('selling_price', $product->selling_price); ?>" required>
+				<div class="mb-3">
+					<label for="price" class="form-label">Price:</label>
+					<input type="number" id="price" name="price" class="form-control" step="0.01" value="<?php echo set_value('price', $product->price); ?>" required>
+				</div>
 
-		<label for="stock">Stock:</label>
-		<input type="number" id="stock" name="stock" value="<?php echo set_value('stock', $product->stock); ?>" required>
+				<div class="mb-3">
+					<label for="selling_price" class="form-label">Selling Price:</label>
+					<input type="number" id="selling_price" name="selling_price" class="form-control" step="0.01" value="<?php echo set_value('selling_price', $product->selling_price); ?>" required>
+				</div>
 
-		<label for="low_stock_threshold">Low Stock Threshold:</label>
-		<input type="number" id="low_stock_threshold" name="low_stock_threshold" value="<?php echo set_value('low_stock_threshold', $product->low_stock_threshold); ?>" required>
+				<div class="mb-3">
+					<label for="stock" class="form-label">Stock:</label>
+					<input type="number" id="stock" name="stock" class="form-control" value="<?php echo set_value('stock', $product->stock); ?>" required>
+				</div>
 
-		<button type="submit" class="btn">Update Product</button>
-	</form>
+				<div class="mb-3">
+					<label for="low_stock_threshold" class="form-label">Low Stock Threshold:</label>
+					<input type="number" id="low_stock_threshold" name="low_stock_threshold" class="form-control" value="<?php echo set_value('low_stock_threshold', $product->low_stock_threshold); ?>" required>
+				</div>
+
+				<button type="submit" class="btn btn-primary w-100">Update Product</button>
+			</form>
+		</div>
+	</div>
 </div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
