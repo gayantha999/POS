@@ -2,138 +2,113 @@
 <html>
 <head>
 	<title>Dashboard</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<style>
 		/* General Styles */
 		body {
 			font-family: 'Inter', Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-			background: #1c1f26; /* Dark background */
-			color: #fff;
+			background: #f8f9fa; /* Light background */
+			color: #212529; /* Text color */
 		}
 
 		h1 {
-			text-align: center;
 			margin-top: 20px;
-			color: #00d4ff; /* Bright accent color */
+			color: #0d6efd; /* Primary accent color */
 			font-size: 2.5rem;
 			font-weight: 600;
 		}
 
 		/* Dashboard Container */
 		.dashboard-container {
-			max-width: 1200px;
-			margin: 250px auto;
-			padding: 30px;
-			background: #282c34; /* Dark card background */
+			margin: auto;
+			padding: 40px;
+			background: #ffffff; /* White card background */
 			border-radius: 15px;
-			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-		}
-
-		/* Buttons Container */
-		.button-container {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-around;
-			margin-top: 30px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
 		}
 
 		/* Buttons */
-		.button {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
-			width: 180px;
-			height: 150px;
-			padding: 20px;
-			font-size: 16px;
-			color: #fff;
-			background: linear-gradient(135deg, #3a3dff, #6c63ff); /* Gradient background */
+		.card {
+			background: #ffffff; /* White card */
+			color: #212529;
 			border: none;
 			border-radius: 15px;
-			cursor: pointer;
-			text-align: center;
 			transition: all 0.3s ease;
-			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 		}
 
-		.button:hover {
+		.card:hover {
 			transform: translateY(-5px);
-			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
 		}
 
-		.button i {
-			font-size: 2.5rem;
+		.card i {
+			font-size: 3rem;
 			margin-bottom: 10px;
-			color: #00d4ff; /* Icon color */
+			color: #0d6efd; /* Primary color for icons */
 		}
 
-		.button span {
+		.card-title {
 			font-weight: 600;
-			color: #ddd; /* Text color */
+			font-size: 1.2rem;
 		}
 
 		/* Footer */
 		.footer {
 			text-align: center;
 			margin-top: 20px;
-			color: #aaa;
+			color: #6c757d;
 			font-size: 0.9rem;
-		}
-
-		/* Responsive Design */
-		@media (max-width: 768px) {
-			.button-container {
-				flex-direction: column;
-				align-items: center;
-			}
-
-			.button {
-				width: 100%;
-				margin-bottom: 15px;
-			}
 		}
 	</style>
 </head>
 <body>
-<div class="dashboard-container">
-	<h1>Welcome to the Dashboard!</h1>
+<div class="container py-5">
+	<div class="dashboard-container text-center">
+		<h1>Welcome to the Dashboard!</h1>
+		<div class="row mt-4 g-4">
+			<!-- View Product List -->
+			<div class="col-lg-3 col-md-6">
+				<a href="<?php echo base_url('inventory'); ?>" class="card text-center p-4 text-decoration-none">
+					<i class="fas fa-boxes"></i>
+					<h5 class="card-title">View Product List</h5>
+				</a>
+			</div>
 
-	<div class="button-container">
-		<!-- View Product List -->
-		<a href="<?php echo base_url('inventory'); ?>" class="button">
-			<i class="fas fa-boxes"></i>
-			<span>View Product List</span>
-		</a>
+			<!-- Add Sale -->
+			<div class="col-lg-3 col-md-6">
+				<a href="<?php echo base_url('sales/add'); ?>" class="card text-center p-4 text-decoration-none">
+					<i class="fas fa-shopping-cart"></i>
+					<h5 class="card-title">Add Sale</h5>
+				</a>
+			</div>
 
-		<!-- Add Sale -->
-		<a href="<?php echo base_url('sales/add'); ?>" class="button">
-			<i class="fas fa-shopping-cart"></i>
-			<span>Add Sale</span>
-		</a>
+			<!-- View Sales -->
+			<div class="col-lg-3 col-md-6">
+				<a href="<?php echo base_url('sales'); ?>" class="card text-center p-4 text-decoration-none">
+					<i class="fas fa-receipt"></i>
+					<h5 class="card-title">View Sales</h5>
+				</a>
+			</div>
 
-		<!-- View Sales -->
-		<a href="<?php echo base_url('sales'); ?>" class="button">
-			<i class="fas fa-receipt"></i>
-			<span>View Sales</span>
-		</a>
+			<!-- View Reports -->
+			<div class="col-lg-3 col-md-6">
+				<a href="<?php echo base_url('sales/reports'); ?>" class="card text-center p-4 text-decoration-none">
+					<i class="fas fa-chart-line"></i>
+					<h5 class="card-title">View Reports</h5>
+				</a>
+			</div>
+		</div>
+	</div>
 
-		<!-- View Reports -->
-		<a href="<?php echo base_url('sales/reports'); ?>" class="button">
-			<i class="fas fa-chart-line"></i>
-			<span>View Reports</span>
-		</a>
+	<div class="footer mt-5">
+		<p>&copy; <?php echo date('Y'); ?> InfinityPOS System | +94765573107</p>
 	</div>
 </div>
 
-<div class="footer">
-	<p>&copy; <?php echo date('Y'); ?> InfinityPOS System | +94765573107</p>
-
-</div>
-
-<!-- FontAwesome Icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
