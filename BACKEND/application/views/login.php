@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Login - InfinityPOS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		/* General Styles */
 		body {
@@ -36,7 +37,7 @@
 		}
 
 		h2 span {
-			color: #6c63ff; /* Accent color for InfinityPOS */
+			color: #6c63ff;
 		}
 
 		p.subtitle {
@@ -63,7 +64,7 @@
 		input {
 			width: 100%;
 			padding: 12px 15px;
-			margin-bottom: 20px;
+			margin-bottom: 15px;
 			border: 1px solid #ced4da;
 			border-radius: 8px;
 			font-size: 16px;
@@ -77,6 +78,21 @@
 			border-color: #007bff;
 			box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 			background: #fff;
+		}
+
+		/* Password Toggle */
+		.password-container {
+			position: relative;
+			width: 100%;
+		}
+
+		.password-toggle {
+			position: absolute;
+			right: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
+			color: #007bff;
 		}
 
 		/* Button Styles */
@@ -98,16 +114,40 @@
 			box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
 		}
 
-		button:active {
-			transform: translateY(1px);
-			box-shadow: none;
+		button:disabled {
+			background: #6c757d;
+			cursor: not-allowed;
+		}
+
+		/* Loading Spinner */
+		.spinner {
+			display: inline-block;
+			width: 18px;
+			height: 18px;
+			border: 3px solid transparent;
+			border-top: 3px solid #fff;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			margin-left: 10px;
+		}
+
+		@keyframes spin {
+			from { transform: rotate(0deg); }
+			to { transform: rotate(360deg); }
 		}
 
 		/* Message Styles */
 		#message {
 			margin-top: 10px;
 			font-size: 14px;
+		}
+
+		#message.error {
 			color: #e74c3c;
+		}
+
+		#message.success {
+			color: green;
 		}
 
 		/* Footer */
@@ -127,9 +167,12 @@
 		<input type="text" id="username" name="username" placeholder="Enter your username" required>
 
 		<label for="password">Password</label>
-		<input type="password" id="password" name="password" placeholder="Enter your password" required>
+<!--		<div class="password-container">-->
+			<input type="password" id="password" name="password" placeholder="Enter your password" required>
+<!--			<span class="password-toggle" onclick="togglePassword()">👁️</span>-->
+<!--		</div>-->
 
-		<button type="submit">Login</button>
+		<button type="submit" id="loginButton">Login</button>
 	</form>
 
 	<p id="message"></p>
@@ -139,39 +182,63 @@
 </div>
 
 <script>
-	// Handle the form submission using JavaScript
+	// Toggle Password Visibility
+	function togglePassword() {
+		const passwordField = document.getElementById('password');
+		const toggleIcon = document.querySelector('.password-toggle');
+		if (passwordField.type === 'password') {
+			passwordField.type = 'text';
+			toggleIcon.textContent = '🙈';
+		} else {
+			passwordField.type = 'password';
+			toggleIcon.textContent = '👁️';
+		}
+	}
+
+	// Handle Form Submission
 	document.getElementById('loginForm').addEventListener('submit', function(event) {
-		event.preventDefault(); // Prevent the default form submission
+		event.preventDefault();
 
 		const username = document.getElementById('username').value;
 		const password = document.getElementById('password').value;
+		const loginButton = document.getElementById('loginButton');
+		const messageElement = document.getElementById('message');
 
-		// Send a POST request using Fetch API
+		// Disable button and show spinner
+		loginButton.disabled = true;
+		loginButton.innerHTML = 'Logging in... <span class="spinner"></span>';
+
+		// Send POST request
 		fetch('<?php echo base_url("Users/login"); ?>', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
-			body: `username=${username}&password=${password}`
+			body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
 		})
 			.then(response => response.json())
 			.then(data => {
-				const messageElement = document.getElementById('message');
 				if (data.status === 'success') {
-					messageElement.style.color = 'green';
+					messageElement.className = 'success';
 					messageElement.textContent = data.message;
-					// Redirect to a dashboard or another page on successful login
+
+					// Redirect to dashboard
 					setTimeout(() => {
 						window.location.href = '<?php echo base_url("dashboard"); ?>';
 					}, 1000);
 				} else {
-					messageElement.style.color = 'red';
+					messageElement.className = 'error';
 					messageElement.textContent = data.message;
+					loginButton.disabled = false;
+					loginButton.textContent = 'Login';
 				}
 			})
 			.catch(error => {
 				console.error('Error:', error);
-				document.getElementById('message').textContent = 'An error occurred while logging in.';
+				messageElement.className = 'error';
+				messageElement.textContent = 'An error occurred. Please try again later.';
+				loginButton.disabled = false;
+				loginButton.textContent = 'Login';
 			});
 	});
 </script>
