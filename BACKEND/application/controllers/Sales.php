@@ -135,9 +135,12 @@ class Sales extends CI_Controller {
 		$input = json_decode(file_get_contents('php://input'), true);
 
 		$last_invoice = $this->SalesModel->getLastInvoiceNumber();
-		$last_two_digits = intval(substr($last_invoice, -2)); // Get the last two digits
-//		print_r($last_two_digits); die();
-		$new_invoice_number = $last_invoice ? 'Invoice-' . str_pad(($last_two_digits + 1), 2, '0', STR_PAD_LEFT) : 'Invoice-01';
+
+		$last_two_digits = explode('-',$last_invoice); // Get the last two digits
+
+//		print_r($last_two_digits[1]); die();
+		$new_invoice_number = $last_invoice ? 'Invoice-' . str_pad(($last_two_digits[1] + 1), 2, '0', STR_PAD_LEFT) : 'Invoice-01';
+		
 		// Process sales data (simplified example)
 		foreach ($input['sales'] as $sale) {
 
@@ -163,6 +166,7 @@ class Sales extends CI_Controller {
 				'total_price' => $sale['total_price'],
 				'sale_date' => date('Y-m-d H:i:s')
 			];
+
 
 			$this->SalesModel->add_sale($data);
 			$stock = $this->SalesModel->QuantityManage($sale['product_id'], $sale['quantity']);

@@ -235,7 +235,8 @@ class SalesModel extends CI_Model {
 
 	public function getLastInvoiceNumber()
 	{
-		$this->db->select_max('invoice_number');
+		$this->db->select('invoice_number');
+		$this->db->order_by('id','desc');
 		$query = $this->db->get('sales');
 		$result = $query->row();
 		return $result->invoice_number ?? null;
