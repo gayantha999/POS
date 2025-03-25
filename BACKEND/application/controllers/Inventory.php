@@ -32,7 +32,10 @@ class Inventory extends CI_Controller {
 		$this->form_validation->set_rules('selling_price', 'Selling Price', 'required|numeric');
 		$this->form_validation->set_rules('stock', 'Stock', 'required|integer');
 		$this->form_validation->set_rules('low_stock_threshold', 'Low Stock Threshold', 'required|integer');
-		$this->form_validation->set_rules('barcode', 'Barcode', 'required|alpha_numeric');
+//		$this->form_validation->set_rules('barcode', 'Barcode', 'required|alpha_numeric');
+		$newBarCodeNumber = rand(1,999999999).time().date("Ymd");
+
+
 
 
 		if ($this->form_validation->run() === FALSE) {
@@ -47,7 +50,7 @@ class Inventory extends CI_Controller {
 				'selling_price' => $this->input->post('selling_price'),
 				'stock' => $this->input->post('stock'),
 				'low_stock_threshold' => $this->input->post('low_stock_threshold'),
-				'barcode' => $this->input->post('barcode'),
+				'barcode' => $newBarCodeNumber,
 			];
 
 			// Save the product

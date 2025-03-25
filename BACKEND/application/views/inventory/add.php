@@ -58,10 +58,10 @@
 				</div>
 
 				<!-- Barcode Field -->
-				<div class="mb-3">
-					<label for="barcode" class="form-label">Barcode:</label>
-					<input type="text" id="barcode" name="barcode" class="form-control" value="<?php echo set_value('barcode'); ?>" required>
-				</div>
+<!--				<div class="mb-3">-->
+<!--					<label for="barcode" class="form-label">Barcode:</label>-->
+<!--					<input type="text" id="barcode" name="barcode" class="form-control" value="--><?php //echo set_value('barcode'); ?><!--" required>-->
+<!--				</div>-->
 
 				<button type="submit" class="btn btn-primary w-100">Add Product</button>
 			</form>
@@ -73,20 +73,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Barcode Scanning Script -->
-<script type="text/javascript">
-	document.getElementById('barcode').addEventListener('focus', function() {
-		// Allow scanning directly into the input field
-		this.value = ''; // Clear the field to ensure no old value is left
-	});
 
-	document.getElementById('barcode').addEventListener('keydown', function(event) {
-		// Check if key pressed is enter (barcode scanner generally sends an enter key after scanning)
-		if (event.key === 'Enter') {
-			// Optional: Add a barcode scanning action here (e.g., auto-fill product info based on the barcode)
-			// You can call an AJAX request to fetch product details based on the barcode
-			console.log('Barcode Scanned:', this.value);
-		}
-	});
-</script>
 </body>
 </html>
