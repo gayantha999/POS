@@ -105,6 +105,7 @@
 						<a href="<?php echo base_url('inventory/edit/'.$product->product_id); ?>" class="btn btn-success btn-sm btn-custom">Edit</a>
 						<a href="<?php echo base_url('inventory/delete/'.$product->product_id); ?>" class="btn btn-danger btn-sm btn-custom"
 						   onclick="return confirm('Delete this product?')">Delete</a>
+						<a href="<?php echo base_url('inventory/print_barcode/'.$product->barcode); ?>" class="btn btn-info btn-sm btn-custom">Print Barcode</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>

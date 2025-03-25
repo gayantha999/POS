@@ -25,6 +25,18 @@ class Inventory extends CI_Controller {
 		$this->load->view('inventory/add');
 	}
 
+	public function print_barcode($barcode) {
+		$this->load->library('barcode');
+		// Generate the barcode
+		$barcode_image = $this->barcode->generate($barcode);
+
+		// Output the barcode image
+		header('Content-Type: image/png');
+		echo $barcode_image;
+		exit; // Prevent further code execution
+	}
+
+
 	public function save() {
 		// Validate input
 		$this->form_validation->set_rules('name', 'Name', 'required');
