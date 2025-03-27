@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once FCPATH . 'vendor/autoload.php';
+
 
 class Inventory extends CI_Controller {
 
@@ -25,16 +27,41 @@ class Inventory extends CI_Controller {
 		$this->load->view('inventory/add');
 	}
 
+//	public function print_barcode($barcode) {
+//		$this->load->helper('barcode');
+//
+//		// Generate the barcode
+//		$barcode_image = generate_barcode($barcode);
+//
+//		if (!$barcode_image) {
+//			show_error("Failed to generate barcode.", 500);
+//			return;
+//		}
+//
+//		// Set header and output the image
+//		header('Content-Type: image/png');
+//		echo $barcode_image;
+//		exit;
+//	}
 	public function print_barcode($barcode) {
-		$this->load->library('barcode');
-		// Generate the barcode
-		$barcode_image = $this->barcode->generate($barcode);
+		$this->load->helper('barcode');
 
-		// Output the barcode image
+		// Generate barcode with text
+		$barcode_image = generate_barcode_with_text($barcode);
+
+		if (!$barcode_image) {
+			show_error("Failed to generate barcode.", 500);
+			return;
+		}
+
+		// Set header and output the image
 		header('Content-Type: image/png');
-		echo $barcode_image;
-		exit; // Prevent further code execution
+		imagepng($barcode_image);
+		imagedestroy($barcode_image); // Free memory
+		exit;
 	}
+
+
 
 
 	public function save() {
